@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+:root {
+    --main-bg-color: #1F1F1F;
+    --main-font-color: #fff;
+    --secondary-font-color: #848484;
+}
 
 *,
 *::before,
@@ -10,8 +16,109 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
+    background-color: var(--main-bg-color);
 }
 
 img {
     width: 100%;
+}
+
+button {
+    padding: 0;
+    /* border: none; */
+    color: inherit;
+    background-color: transparent;
+    font-family: inherit;
+}
+
+button:focus {
+    outline: none;
+}
+
+.add-btn {
+    height: 1em;
+    width: 1em;
+    font-size: 2rem;
+    line-height: 0;
+    color: var(--secondary-font-color);
+    font-weight: 100;
+}
+
+.side-menu {
+    background-color: #282828;
+    color: var(--main-font-color);
+    width: 420px;
+    height: 100vh;
+    padding: 1.5rem 0 1.5rem 3rem
+}
+
+.side-menu .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5em;
+}
+
+.side-menu .section-title {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.side-menu .projects-container {
+    margin-left: 2em;
+    display: grid;
+    grid-gap: 1rem;
+}
+
+.side-menu .project-expand-row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 0.5em;
+}
+
+.side-menu .project-expand {
+    font-size: 1.5rem;
+    font-weight: 600;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.side-menu .todo-count {
+    margin-top: 0.1em;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--secondary-font-color);
+}
+
+.side-menu .add-todo-btn {
+    background-color: transparent;
+    width: 10%;
+}
+
+.side-menu .todo-container {
+    margin-left: 3em;
+    display: grid;
+    grid-gap: 1rem;
+}
+
+.side-menu .todo-title {
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.side-menu  .todo-due-date {
+    color: var(--secondary-font-color);
+}
+
+.side-menu .todo {
+    display: flex;
+    align-items: center;
+}
+
+.side-menu .todo input {
+    width: 16px;
+    height: 16px;
+    margin-right: 1em;
 }
