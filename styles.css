@@ -42,7 +42,12 @@ button:focus {
     color: var(--main-font-color);
     width: 420px;
     height: 100vh;
-    padding: 1.5rem 0 1.5rem 3rem
+    padding: 1.5rem 0 1.5rem 3rem;
+    position: fixed;
+}
+
+.side-menu:hover {
+    overflow-y: auto;
 }
 
 .side-menu .section-header {
