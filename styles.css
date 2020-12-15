@@ -69,60 +69,34 @@ button:focus {
 }
 
 .side-menu .projects-container {
-    margin-left: 2em;
-    display: grid;
-    grid-gap: 1rem;
+    list-style: none;
 }
 
-.side-menu .project-expand-row {
-    display: flex;
+.side-menu .project {
+    margin-top: 1em;
+}
+
+.side-menu .project-row-btn {
+    padding: 0.5em 1em;
     width: 100%;
-    margin-bottom: 0.5em;
+    text-align: left;
+    font-size: 1rem;
+    word-break: break-all;
 }
 
-.side-menu .project-expand {
-    font-size: 1.5rem;
-    font-weight: 600;
-    width: 90%;
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
+.side-menu .project-row-btn:hover {
+    background-color: #3C3C3C;
+}
+
+.side-menu .project-color {
+    color: var(--secondary-font-color);
+    font-size: 1.5em;
+    line-height: 1ch;
+    margin-right: 0.3em;
 }
 
 .side-menu .todo-count {
-    margin-top: 0.1em;
-    font-size: 1rem;
-    font-weight: 400;
     color: var(--secondary-font-color);
-}
-
-.side-menu .add-todo-btn {
-    background-color: transparent;
-    width: 10%;
-}
-
-.side-menu .todo-container {
-    margin-left: 3em;
-    display: grid;
-    grid-gap: 1rem;
-}
-
-.side-menu .todo-title {
-    font-weight: 400;
-    font-size: 1rem;
-}
-
-.side-menu  .todo-due-date {
-    color: var(--secondary-font-color);
-}
-
-.side-menu .todo {
-    display: flex;
-    align-items: center;
-}
-
-.side-menu .todo input {
-    width: 16px;
-    height: 16px;
-    margin-right: 1em;
+    margin-left: 0.2em;
+    font-size: 0.8em;
 }
