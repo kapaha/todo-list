@@ -4,6 +4,8 @@
     --main-bg-color: #1F1F1F;
     --main-font-color: #fff;
     --secondary-font-color: #848484;
+    --sidebar-width: 420px;
+    --hover: #333333;
 }
 
 *,
@@ -23,6 +25,10 @@ img {
     width: 100%;
 }
 
+ul {
+    list-style: none;
+}
+
 button {
     cursor: pointer;
     padding: 0;
@@ -35,15 +41,38 @@ button {
 
 button:focus {
     outline: none;
+    border: 1px solid #fff;
 }
 
+.btn-square {
+    --size: 2em;
+    width: var(--size);
+    height: var(--size);
+    min-width: var(--size);
+    transition: background-color 300ms ease-in-out;
+}
+
+.btn-square:hover {
+    background-color: var(--hover);
+}
+
+.btn-square:active {
+    transform: translateY(1px);
+}
+
+.btn-square--round {
+    border-radius: 0.25em;
+}
+
+/* side menu */
 .side-menu {
     background-color: #282828;
     color: var(--main-font-color);
-    width: 420px;
-    height: 100vh;
+    width: var(--sidebar-width);
+    height: 100%;
     padding: 1.5rem 0 1.5rem 3rem;
     position: fixed;
+    overflow-x: hidden;
 }
 
 .side-menu:hover {
@@ -53,7 +82,7 @@ button:focus {
 .side-menu .section-header {
     display: flex;
     margin-bottom: 0.5em;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .side-menu .section-expand-btn {
@@ -67,14 +96,6 @@ button:focus {
     margin-left: 0.5em;
     font-weight: 600;
     letter-spacing: 2px;
-}
-
-.side-menu .add-btn {
-    padding: 0 0.4em;
-}
-
-.side-menu .projects-container {
-    list-style: none;
 }
 
 .side-menu .project {
@@ -104,4 +125,119 @@ button:focus {
     color: var(--secondary-font-color);
     margin-left: 0.2em;
     font-size: 0.8em;
+}
+
+/* project view */
+.project-view {
+    margin-left: var(--sidebar-width);
+    background-color: var(--main-bg-color);
+    color: var(--main-font-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3em;
+}
+
+.project-info {
+    width: 75%;
+    max-width: 800px;
+}
+
+.project-info header {
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.project-info .project-title {
+    font-size: 2rem;
+    margin-right: 1em;
+}
+
+.project-info .todo {
+    --todo-spacing: 0.8em;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--secondary-font-color);
+}
+
+.todo-container > * + * {
+    margin-top: var(--todo-spacing);
+}
+
+.project-info .todo-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.project-info .todo-due-date {
+    color: var(--secondary-font-color);
+}
+
+.todo-btns {
+    display: flex;
+}
+
+.todo-btns > * + * {
+    margin-left: 0.3em;
+}
+
+
+.todo label {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    margin-right: 1em;
+    width: 100%;
+    cursor: pointer;
+    line-height: 1em;
+    padding-bottom: var(--todo-spacing);
+}
+
+/* custom checkbox styles */
+.hide-checkbox {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.custom-checkbox {
+    --size: 1em;
+    display: inline-block;
+    width: var(--size);
+    height: var(--size);
+    min-width: var(--size);
+    min-height: var(--size);
+    margin-right: var(--size);
+    cursor: pointer;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    transform: scale(1);
+    transition: transform 300ms ease-in-out;
+}
+
+label:hover .custom-checkbox,
+[type="checkbox"]:focus + label .custom-checkbox {
+    transform: scale(1.2);
+    background-color: var(--hover);
+}
+
+[type="checkbox"]:checked + label .custom-checkbox {
+    background-color: var(--hover);
+    border-color: var(--hover);
+    box-shadow: inset 0 0 0 2px white;
+}
+
+[type="checkbox"]:checked + label {
+    opacity: 0.5;
+}
+
+[type="checkbox"]:checked + label .todo-title {
+    text-decoration: line-through;
 }

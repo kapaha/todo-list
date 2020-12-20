@@ -7,6 +7,7 @@
     <title>Todo List</title>
     <link rel="stylesheet" href="styles.css">
     <script defer src="main.js"></script>
+    <script src="https://kit.fontawesome.com/4323c15833.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -23,7 +24,7 @@
                     </svg>
                     <span class="section-title">Projects</span>
                 </button>
-                <button class="add-btn">&plus;</button>
+                <button class="btn-square btn-square--small" title="Add Project"><i class="fas fa-plus"></i></button>
             </header>
             <ul class="projects-container">
                 <li class="project">
@@ -36,7 +37,34 @@
             </ul>
         </section>
     </aside>
-    <main class="content">
+    <main class="project-view">
+        <div class="project-info">
+            <header>
+                <h1 class="project-title">Work</h1>
+                <button class="btn-square btn-square--round" title="Add Todo"><i class="fas fa-plus"></i></button>
+            </header>
+            <ul class="todo-container">
+                <li class="todo">
+                    <input type="checkbox" id="todo1" class="hide-checkbox" />
+                    <label for="todo1">
+                        <span class="custom-checkbox"></span>
+                        <div class="todo-info">
+                            <span class="todo-title">Example Todo</span>
+                            <span class="todo-due-date">Tue 8 Dec</span>
+                        </div>
+                    </label>
+                    <div class="todo-btns">
+                        <button class="btn-square btn-square--round btn-todo" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn-square btn-square--round btn-todo" title="Delete">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        </div>
     </main>
 </body>
 
