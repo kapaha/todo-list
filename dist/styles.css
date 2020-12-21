@@ -4,8 +4,11 @@
     --main-bg-color: #1F1F1F;
     --main-font-color: #fff;
     --secondary-font-color: #848484;
-    --sidebar-width: 420px;
+    --sidebar-width: 100vw;
     --hover: #333333;
+
+    --header-height: 3rem;
+    --z-fixed: 100;
 }
 
 *,
@@ -19,6 +22,11 @@
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: var(--main-bg-color);
+
+    position: relative;
+    margin-top: var(--header-height);
+    padding: 0 1rem;
+    transition: padding 0.5s;
 }
 
 img {
@@ -64,15 +72,47 @@ button:focus {
     border-radius: 0.25em;
 }
 
+/* header */
+.header {
+    width: 100%;
+    height: var(--header-height);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    z-index: calc(var(--z-fixed) + 1);
+    transition: height 0.5s;
+    background-color: #282828;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.header__toggle {
+    color: #FFF;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
 /* side menu */
 .side-menu {
     background-color: #282828;
     color: var(--main-font-color);
     width: var(--sidebar-width);
-    height: 100%;
-    padding: 1.5rem 0 1.5rem 3rem;
     position: fixed;
-    overflow-x: hidden;
+    overflow: hidden;
+
+    top: var(--header-height);
+    height: calc(100vh - var(--header-height));
+    z-index: var(--z-fixed);
+    left: -200%;
+    padding: 1rem 0.5rem;
+    transition: left 0.5s, width 0.5s, top 0.5s;
+}
+
+.mobile-open {
+    left: 0;
 }
 
 .side-menu:hover {
@@ -129,7 +169,6 @@ button:focus {
 
 /* project view */
 .project-view {
-    margin-left: var(--sidebar-width);
     background-color: var(--main-bg-color);
     color: var(--main-font-color);
     display: flex;
@@ -240,4 +279,36 @@ label:hover .custom-checkbox,
 
 [type="checkbox"]:checked + label .todo-title {
     text-decoration: line-through;
+}
+
+/* media queries */
+/* desktop */
+@media screen and (min-width: 768px) {
+    :root {
+        --sidebar-width: 420px;
+    }
+
+    .desktop-open {
+        padding-left: calc(var(--sidebar-width) + 1rem);
+    }
+
+    .desktop-open .side-menu {
+        left: 0;
+    }
+
+    .header {
+        height: calc(var(--header-height) + 1rem);
+    }
+
+    .side-menu {
+        top: calc(var(--header-height) + 1rem);
+    }
+
+    #header-toggle.fa-times:before {
+        content: "";
+    }
+
+    #header-toggle.fa-bars:before {
+        content: "\f0c9";
+    }
 }
