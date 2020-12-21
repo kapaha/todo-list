@@ -303,12 +303,4 @@ label:hover .custom-checkbox,
     .side-menu {
         top: calc(var(--header-height) + 1rem);
     }
-
-    #header-toggle.fa-times:before {
-        content: "";
-    }
-
-    #header-toggle.fa-bars:before {
-        content: "\f0c9";
-    }
 }
