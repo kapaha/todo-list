@@ -68,6 +68,36 @@
         </div>
     </main>
 
+    <div class="modal" data-modal="form-create-project">
+        <header class="modal__header">
+            <h1 class="modal__title">Add Project</h1>
+        </header>
+        <div class="modal__body">
+            <form class="modal_form" data-form="create-project">
+                <div class="modal__form-group">
+                    <label for="input-project-name">Project Name</label>
+                    <input type="text" id="input-project-name">
+                </div>
+                <div class="modal__form-group">
+                    <label for="input-project-color">Choose a color:</label>
+                    <select id="input-project-color">
+                        <option data-css-color="red">Red</option>
+                        <option data-css-color="green">Green</option>
+                        <option data-css-color="blue">Blue</option>
+                        <option data-css-color="yellow">Yellow</option>
+                        <option data-css-color="purple">Purple</option>
+                        <option data-css-color="orange">Orange</option>
+                        <option selected data-css-color="grey">Grey</option>
+                    </select>
+                </div>
+                <button class="btn btn--submit" type="button">Cancel</button>
+                <button class="btn btn--cancel" type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="overlay"></div>
+
     <template data-template="project">
         <li data-project-id="" class="project">
             <button class="project-row-btn">
