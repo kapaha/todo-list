@@ -47,6 +47,10 @@ button {
     font-size: inherit;
 }
 
+button > * {
+    pointer-events: none;
+}
+
 button:focus {
     outline: none;
     border: 1px solid #fff;
