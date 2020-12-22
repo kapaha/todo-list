@@ -33,13 +33,7 @@
                 <button class="btn-square btn-square--small" title="Add Project"><i class="fas fa-plus"></i></button>
             </header>
             <ul class="projects-container">
-                <li class="project">
-                    <button class="project-row-btn">
-                        <span class="project-color">&#9679;</span>
-                        <span class="project-title">Work</span>
-                        <span class="todo-count">5</span>
-                    </button>
-                </li>
+                <!-- new projects generated with JS -->
             </ul>
         </section>
     </aside>
@@ -73,6 +67,16 @@
         </div>
         </div>
     </main>
+
+    <template data-template="project">
+        <li data-project-id="" class="project">
+            <button class="project-row-btn">
+                <span class="project-color">&#9679;</span>
+                <span class="project-title"></span>
+                <span class="todo-count"></span>
+            </button>
+        </li>
+    </template>
 </body>
 
 </html>
