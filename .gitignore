@@ -6,3 +6,7 @@
 # Dependency directories #
 ##########################
 node_modules/
+
+# Source Maps #
+###############
+main.js.map
