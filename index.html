@@ -30,7 +30,7 @@
                     </svg>
                     <span class="section-title">Projects</span>
                 </button>
-                <button class="btn-square btn-square--small" title="Add Project"><i class="fas fa-plus"></i></button>
+                <button data-modal-target="#modal-create-project" class="btn-square btn-square--small" title="Add Project"><i class="fas fa-plus"></i></button>
             </header>
             <ul class="projects-container">
                 <!-- new projects generated with JS -->
@@ -68,7 +68,7 @@
         </div>
     </main>
 
-    <div class="modal" data-modal="form-create-project">
+    <div class="modal" id="modal-create-project">
         <header class="modal__header">
             <h1 class="modal__title">Add Project</h1>
         </header>
@@ -90,7 +90,7 @@
                         <option selected data-css-color="grey">Grey</option>
                     </select>
                 </div>
-                <button class="btn btn--submit" type="button">Cancel</button>
+                <button class="btn btn--submit" type="button" data-btn="close-modal">Cancel</button>
                 <button class="btn btn--cancel" type="submit">Add</button>
             </form>
         </div>
