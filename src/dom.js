@@ -1,3 +1,5 @@
+import { createProjectComponent } from './components';
+
 export function toggleSideMenu() {
     if (elems.sideMenu == null) return;
 
@@ -34,10 +36,31 @@ export function closeModalAndHideOverlay(modal) {
     hideOverlay();
 }
 
+export function addProjectToUI(project) {
+    const projectComponent = createProjectComponent(project);
+    elems.projectsContainer.appendChild(projectComponent);
+}
+
+export function getCreateProjectFormData() {
+    // get the form elements values
+    const projectName = elems.projectNameInput.value;
+    const projectColor = elems.projectColorInput
+        .options[elems.projectColorInput.selectedIndex]
+        .dataset.cssColor;
+
+    return {
+        name: projectName,
+        color: projectColor
+    }
+}
+
 const elems = {
     body: document.body,
     sideMenu: document.querySelector('[data-side-menu]'),
-    overlay: document.getElementById('overlay')
+    overlay: document.getElementById('overlay'),
+    projectsContainer: document.getElementById('projects-container'),
+    projectNameInput: document.getElementById('input-project-name'),
+    projectColorInput: document.getElementById('input-project-color')
 };
 
 function showModal(modal) {
