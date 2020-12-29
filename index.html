@@ -32,7 +32,7 @@
                 </button>
                 <button data-modal-target="#modal-create-project" class="btn-square btn-square--small" title="Add Project"><i class="fas fa-plus"></i></button>
             </header>
-            <ul class="projects-container">
+            <ul id="projects-container" class="projects-container">
                 <!-- new projects generated with JS -->
             </ul>
         </section>
@@ -99,10 +99,10 @@
     <div id="overlay"></div>
 
     <template data-template="project">
-        <li data-project-id="" class="project">
+        <li class="project">
             <button class="project-row-btn">
                 <span class="project-color">&#9679;</span>
-                <span class="project-title"></span>
+                <span class="project-name"></span>
                 <span class="todo-count"></span>
             </button>
         </li>
