@@ -6,3 +6,7 @@ export default class Project {
         this.todoList = [];
     }
 }
+
+export function createDefaultProject() {
+    return new Project('Default', 'grey');
+}

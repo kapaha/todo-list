@@ -1,11 +1,13 @@
 import addGlobalEventListener from './events';
 import * as dom from './dom';
-import Project from './project'
+import Project from './project';
+import * as localStorage from './localStorage';
 
 init();
 
 function init() {
     initGlobalEventListeners();
+    dom.renderProjects();
 }
 
 function initGlobalEventListeners() {
@@ -28,8 +30,6 @@ function initGlobalEventListeners() {
     addGlobalEventListener('submit', '[data-form="create-project"]', handleCreateProjectFormSubmit);
 }
 
-const projects = [];
-
 function handleCreateProjectFormSubmit(e) {
     e.preventDefault();
 
@@ -39,16 +39,13 @@ function handleCreateProjectFormSubmit(e) {
     if (!isValidCreateProjectFormData(formData)) return;
 
     const formatedFormData = formatCreateProjectFormData(formData);
-
     const project = new Project(
         formatedFormData.name,
         formatedFormData.color
     );
 
-    // save the project
-    projects.push(project);
-
-    dom.addProjectToUI(project);
+    localStorage.addProject(project);
+    dom.renderProjects();
 
     form.reset();
 

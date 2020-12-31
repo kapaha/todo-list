@@ -1,4 +1,5 @@
 import { createProjectComponent } from './components';
+import { getProjects } from './localStorage';
 
 export function toggleSideMenu() {
     if (elems.sideMenu == null) return;
@@ -36,11 +37,6 @@ export function closeModalAndHideOverlay(modal) {
     hideOverlay();
 }
 
-export function addProjectToUI(project) {
-    const projectComponent = createProjectComponent(project);
-    elems.projectsContainer.appendChild(projectComponent);
-}
-
 export function getCreateProjectFormData() {
     // get the form elements values
     const projectName = elems.projectNameInput.value;
@@ -52,6 +48,19 @@ export function getCreateProjectFormData() {
         name: projectName,
         color: projectColor
     }
+}
+
+export function renderProjects() {
+    const fragment = document.createDocumentFragment();
+    const projects = getProjects();
+
+    projects.forEach(project => {
+        const projectComponent = createProjectComponent(project);
+        fragment.appendChild(projectComponent);
+    });
+
+    removeAllChildElements(elems.projectsContainer);
+    elems.projectsContainer.appendChild(fragment);
 }
 
 const elems = {
@@ -97,4 +106,10 @@ function hideOverlay() {
 
 function isDesktopView() {
     return window.matchMedia('(min-width: 768px)').matches;
+}
+
+function removeAllChildElements(element) {
+    while (element.firstChild) {
+        element.removeChild(element.firstChild);
+    }
 }
