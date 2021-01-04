@@ -1,3 +1,6 @@
+import { getSelectedProjectId } from './localStorage';
+import { highlightProjectBtn } from './dom';
+
 const templates = {
     project: document.querySelector('[data-template="project"'),
     projectView: document.querySelector('[data-template="project-view"]'),
@@ -21,6 +24,11 @@ export function createProjectComponent(project) {
     projectTitle.textContent = project.name;
     todoCount.textContent = project.todoList.length;
     projectColor.style.color = project.color;
+
+    if (project.id === getSelectedProjectId()) {
+        const projectRowBtn = fragment.querySelector('[data-btn="show-project-view"]')
+        highlightProjectBtn(projectRowBtn);
+    }
 
     return fragment;
 }

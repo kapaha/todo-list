@@ -157,7 +157,11 @@ button:focus {
 }
 
 .side-menu .project-row-btn:hover {
-    background-color: #3C3C3C;
+    background-color: var(--hover);
+}
+
+.project-row-btn--highlight {
+    background-color: var(--hover);
 }
 
 .side-menu .project-color {

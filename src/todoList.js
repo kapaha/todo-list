@@ -23,7 +23,8 @@ export function initGlobalEventListeners() {
     addGlobalEventListener('submit', '[data-form="create-project"]', handleCreateProjectFormSubmit);
 
     addGlobalEventListener('click', '[data-btn="show-project-view"]', (e) => {
-        const projectId = getClosestProjectId(e.target);
+        const projectRowBtn = e.target;
+        const projectId = getClosestProjectId(projectRowBtn);
 
         // return if project is already selected
         if (projectId === ls.getSelectedProjectId()) return;
@@ -31,6 +32,7 @@ export function initGlobalEventListeners() {
         const project = getProjectById(projectId);
 
         ls.saveSelectedProjectId(projectId);
+        dom.highlightProjectBtn(projectRowBtn);
         dom.renderProjectView(project);
     });
 

@@ -1,6 +1,8 @@
 import * as comp from './components';
 import { getProjects } from './localStorage';
 
+const HIGHLIGHT_PROJECT_CSS_CLASS = 'project-row-btn--highlight';
+
 export function toggleSideMenu() {
     if (elems.sideMenu == null) return;
 
@@ -74,6 +76,11 @@ export function removeProjectView() {
     removeAllChildElements(elems.projectViewContainer);
 }
 
+export function highlightProjectBtn(btn) {
+    removeHighlightedProjectBtn();
+    btn.classList.add(HIGHLIGHT_PROJECT_CSS_CLASS);
+}
+
 const elems = {
     body: document.body,
     sideMenu: document.querySelector('[data-side-menu]'),
@@ -124,4 +131,12 @@ function removeAllChildElements(element) {
     while (element.firstChild) {
         element.removeChild(element.firstChild);
     }
+}
+
+function removeHighlightedProjectBtn() {
+    const highlightedBtn = document.querySelector(`.${HIGHLIGHT_PROJECT_CSS_CLASS}`);
+
+    if (highlightedBtn == null) return;
+
+    highlightedBtn.classList.remove(HIGHLIGHT_PROJECT_CSS_CLASS);
 }
