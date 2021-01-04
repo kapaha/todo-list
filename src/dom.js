@@ -1,4 +1,4 @@
-import { createProjectComponent } from './components';
+import * as comp from './components';
 import { getProjects } from './localStorage';
 
 export function toggleSideMenu() {
@@ -55,12 +55,23 @@ export function renderProjects() {
     const projects = getProjects();
 
     projects.forEach(project => {
-        const projectComponent = createProjectComponent(project);
+        const projectComponent = comp.createProjectComponent(project);
         fragment.appendChild(projectComponent);
     });
 
     removeAllChildElements(elems.projectsContainer);
     elems.projectsContainer.appendChild(fragment);
+}
+
+export function renderProjectView(project) {
+    if (project == null) return;
+    const projectViewComponent = comp.createProjectViewComponent(project);
+    removeProjectView();
+    elems.projectViewContainer.appendChild(projectViewComponent);
+}
+
+export function removeProjectView() {
+    removeAllChildElements(elems.projectViewContainer);
 }
 
 const elems = {
@@ -69,7 +80,8 @@ const elems = {
     overlay: document.getElementById('overlay'),
     projectsContainer: document.getElementById('projects-container'),
     projectNameInput: document.getElementById('input-project-name'),
-    projectColorInput: document.getElementById('input-project-color')
+    projectColorInput: document.getElementById('input-project-color'),
+    projectViewContainer: document.querySelector('[data-container="project-view"]')
 };
 
 function showModal(modal) {

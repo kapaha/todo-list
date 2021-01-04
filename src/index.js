@@ -1,14 +1,16 @@
 import addGlobalEventListener from './events';
 import * as dom from './dom';
 import Project from './project';
-import * as localStorage from './localStorage';
+import * as ls from './localStorage';
 
 init();
 
 function init() {
     initGlobalEventListeners();
     dom.renderProjects();
+    dom.renderProjectView(getSelectedProject());
 }
+
 
 function initGlobalEventListeners() {
     addGlobalEventListener('click', '[data-header-toggle]', dom.toggleSideMenu);
@@ -28,6 +30,30 @@ function initGlobalEventListeners() {
     });
 
     addGlobalEventListener('submit', '[data-form="create-project"]', handleCreateProjectFormSubmit);
+
+    addGlobalEventListener('click', '[data-btn="show-project-view"]', (e) => {
+        const projectId = getClosestProjectId(e.target);
+
+        // return if project is already selected
+        if (projectId === ls.getSelectedProjectId()) return;
+
+        const project = getProjectById(projectId);
+
+        ls.saveSelectedProjectId(projectId);
+        dom.renderProjectView(project);
+    });
+
+    addGlobalEventListener('click', '[data-btn="delete-project"]', (e) => {
+        const projectId = getClosestProjectId(e.target);
+
+        ls.removeProject(projectId);
+        dom.renderProjects();
+
+        if (projectId === ls.getSelectedProjectId()) {
+            ls.removeSelectedProjectId();
+            dom.removeProjectView();
+        }
+    });
 }
 
 function handleCreateProjectFormSubmit(e) {
@@ -44,7 +70,7 @@ function handleCreateProjectFormSubmit(e) {
         formatedFormData.color
     );
 
-    localStorage.addProject(project);
+    ls.addProject(project);
     dom.renderProjects();
 
     form.reset();
@@ -65,4 +91,18 @@ function formatCreateProjectFormData(formData) {
     formDataClone.name = formDataClone.name.trim();
 
     return formDataClone;
+}
+
+function getClosestProjectId(element) {
+    const projectEl = element.closest('[data-project-id]');
+    return projectEl.dataset.projectId;
+}
+
+function getProjectById(projectId) {
+    return ls.getProjects().filter(project => project.id === projectId)[0];
+}
+
+function getSelectedProject() {
+    const selectedProjectId = ls.getSelectedProjectId();
+    return getProjectById(selectedProjectId);
 }

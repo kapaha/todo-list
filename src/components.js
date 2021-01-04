@@ -1,5 +1,7 @@
 const templates = {
-    project: document.querySelector('[data-template="project"')
+    project: document.querySelector('[data-template="project"'),
+    projectView: document.querySelector('[data-template="project-view"]'),
+    todo: document.querySelector('[data-template="todo"]')
 }
 
 function getFragmentFromTemplate(template) {
@@ -21,4 +23,20 @@ export function createProjectComponent(project) {
     projectColor.style.color = project.color;
 
     return fragment;
+}
+
+export function createProjectViewComponent(project) {
+    const fragment = getFragmentFromTemplate(templates.projectView);
+
+    const container = fragment.querySelector('.project-view');
+    const projectName = fragment.querySelector('.project-name');
+
+    container.dataset.projectId = project.id;
+    projectName.textContent = project.name;
+
+    return fragment;
+}
+
+export function createTodoComponent(todo) {
+    const fragment = getFragmentFromTemplate(templates.todo);
 }
