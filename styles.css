@@ -174,7 +174,7 @@ button:focus {
 }
 
 /* project view */
-.project-view {
+.project-view-container {
     background-color: var(--main-bg-color);
     color: var(--main-font-color);
     display: flex;
@@ -183,12 +183,12 @@ button:focus {
     padding: 3em;
 }
 
-.project-info {
+.project-view {
     width: 75%;
     max-width: 800px;
 }
 
-.project-info header {
+.project-view header {
     font-size: 1rem;
     display: flex;
     justify-content: space-between;
@@ -196,12 +196,12 @@ button:focus {
     margin-bottom: 1em;
 }
 
-.project-info .project-title {
+.project-view .project-name {
     font-size: 2rem;
     margin-right: 1em;
 }
 
-.project-info .todo {
+.project-view .todo {
     --todo-spacing: 0.8em;
     position: relative;
     display: flex;
@@ -214,21 +214,21 @@ button:focus {
     margin-top: var(--todo-spacing);
 }
 
-.project-info .todo-info {
+.project-view .todo-info {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
 }
 
-.project-info .todo-due-date {
+.project-view .todo-due-date {
     color: var(--secondary-font-color);
 }
 
-.todo-btns {
+.btn-row {
     display: flex;
 }
 
-.todo-btns > * + * {
+.btn-row > * + * {
     margin-left: 0.3em;
 }
 
@@ -283,7 +283,7 @@ label:hover .custom-checkbox,
     opacity: 0.5;
 }
 
-[type="checkbox"]:checked + label .todo-title {
+[type="checkbox"]:checked + label .todo-name {
     text-decoration: line-through;
 }
 

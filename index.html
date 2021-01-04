@@ -38,34 +38,8 @@
         </section>
     </aside>
 
-    <main class="project-view">
-        <div class="project-info">
-            <header>
-                <h1 class="project-title">Work</h1>
-                <button class="btn-square btn-square--round" title="Add Todo"><i class="fas fa-plus"></i></button>
-            </header>
-            <ul class="todo-container">
-                <li class="todo">
-                    <input type="checkbox" id="todo1" class="hide-checkbox" />
-                    <label for="todo1">
-                        <span class="custom-checkbox"></span>
-                        <div class="todo-info">
-                            <span class="todo-title">Example Todo</span>
-                            <span class="todo-due-date">Tue 8 Dec</span>
-                        </div>
-                    </label>
-                    <div class="todo-btns">
-                        <button class="btn-square btn-square--round btn-todo" title="Edit">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn-square btn-square--round btn-todo" title="Delete">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        </div>
+    <main data-container="project-view" class="project-view-container">
+        <!-- project info generated with JS -->
     </main>
 
     <div class="modal" id="modal-create-project">
@@ -100,11 +74,51 @@
 
     <template data-template="project">
         <li class="project">
-            <button class="project-row-btn">
+            <button data-btn="show-project-view" class="project-row-btn">
                 <span class="project-color">&#9679;</span>
                 <span class="project-name"></span>
                 <span class="todo-count"></span>
             </button>
+        </li>
+    </template>
+
+    <template data-template="project-view">
+        <div class="project-view">
+            <header>
+                <h1 class="project-name"></h1>
+                <div class="btn-row">
+                    <button class="btn-square btn-square--round" title="Add Todo">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button data-btn="delete-project" class="btn-square btn-square--round" title="Delete Project">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            </header>
+            <ul class="todo-container">
+                <!-- todos generated with JS -->
+            </ul>
+        </div>
+    </template>
+
+    <template data-tempalte="todo">
+        <li class="todo">
+            <input type="checkbox" id="" class="hide-checkbox" />
+            <label for="">
+                <span class="custom-checkbox"></span>
+                <div class="todo-info">
+                    <span class="todo-name"></span>
+                    <span class="todo-due-date"></span>
+                </div>
+            </label>
+            <div class="btn-row">
+                <button class="btn-square btn-square--round btn-todo" title="Edit">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn-square btn-square--round btn-todo" title="Delete">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
         </li>
     </template>
 </body>
