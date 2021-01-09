@@ -23,17 +23,15 @@ export function initGlobalEventListeners() {
     addGlobalEventListener('submit', '[data-form="create-project"]', handleCreateProjectFormSubmit);
 
     addGlobalEventListener('click', '[data-btn="show-project-view"]', (e) => {
-        const projectRowBtn = e.target;
-        const projectId = getClosestProjectId(projectRowBtn);
+        const projectBtn = e.target;
+        const projectId = getClosestProjectId(projectBtn);
 
         // return if project is already selected
         if (projectId === ls.getSelectedProjectId()) return;
 
         const project = getProjectById(projectId);
 
-        ls.saveSelectedProjectId(projectId);
-        dom.highlightProjectBtn(projectRowBtn);
-        dom.renderProjectView(project);
+        handleProjectViewChange(project);
     });
 
     addGlobalEventListener('click', '[data-btn="delete-project"]', (e) => {
@@ -74,6 +72,7 @@ function handleCreateProjectFormSubmit(e) {
 
     ls.addProject(project);
     dom.renderProjects();
+    handleProjectViewChange(project);
 
     form.reset();
 
@@ -102,4 +101,14 @@ function getClosestProjectId(element) {
 
 function getProjectById(projectId) {
     return ls.getProjects().filter(project => project.id === projectId)[0];
+}
+
+function handleProjectViewChange(project) {
+    ls.saveSelectedProjectId(project.id);
+    dom.highlightProjectBtn(getProjectBtn(project));
+    dom.renderProjectView(project);
+}
+
+function getProjectBtn(project) {
+    return document.querySelector(`li[data-project-id="${project.id}"]`)
 }
