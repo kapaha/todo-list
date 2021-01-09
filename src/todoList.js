@@ -54,6 +54,10 @@ export function getSelectedProject() {
     return getProjectById(selectedProjectId);
 }
 
+export function generateId() {
+    return Date.now().toString();
+}
+
 function handleCreateProjectFormSubmit(e) {
     e.preventDefault();
 
