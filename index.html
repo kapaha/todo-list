@@ -70,6 +70,26 @@
         </div>
     </div>
 
+    <div class="modal" id="modal-create-todo">
+        <header class="modal__header">
+            <h1 class="modal__title">Add Todo</h1>
+        </header>
+        <div class="modal__body">
+            <form class="modal_form" data-form="create-todo">
+                <div class="modal__form-group">
+                    <label for="input-todo-name">Name</label>
+                    <input type="text" id="input-todo-name">
+                </div>
+                <div class="modal__form-group">
+                    <label for="input-todo-due-date">Due Date</label>
+                    <input type="date" id="input-todo-due-date">
+                </div>
+                <button class="btn btn--cancel" type="button" data-btn="close-modal">Cancel</button>
+                <button class="btn btn--submit" type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+
     <div id="overlay"></div>
 
     <template data-template="project">
@@ -77,7 +97,7 @@
             <button data-btn="show-project-view" class="project-row-btn">
                 <span class="project-color">&#9679;</span>
                 <span class="project-name"></span>
-                <span class="todo-count"></span>
+                <span class="todo-count" data-todo-count></span>
             </button>
         </li>
     </template>
@@ -87,7 +107,7 @@
             <header>
                 <h1 class="project-name"></h1>
                 <div class="btn-row">
-                    <button class="btn-square btn-square--round" title="Add Todo">
+                    <button class="btn-square btn-square--round" title="Add Todo" data-modal-target="#modal-create-todo">
                         <i class="fas fa-plus"></i>
                     </button>
                     <button data-btn="delete-project" class="btn-square btn-square--round" title="Delete Project">
@@ -95,16 +115,16 @@
                     </button>
                 </div>
             </header>
-            <ul class="todo-container">
+            <ul data-container="todo-container" class="todo-container">
                 <!-- todos generated with JS -->
             </ul>
         </div>
     </template>
 
-    <template data-tempalte="todo">
+    <template data-template="todo">
         <li class="todo">
-            <input type="checkbox" id="" class="hide-checkbox" />
-            <label for="">
+            <input type="checkbox" class="hide-checkbox" data-checkbox="todo" />
+            <label data-label="todo-checkbox">
                 <span class="custom-checkbox"></span>
                 <div class="todo-info">
                     <span class="todo-name"></span>
