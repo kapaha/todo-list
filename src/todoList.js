@@ -2,6 +2,7 @@ import addGlobalEventListener from './events';
 import * as dom from './dom';
 import Project from './project';
 import * as ls from './localStorage';
+import Todo from './todo';
 
 export function initGlobalEventListeners() {
     addGlobalEventListener('click', '[data-header-toggle]', dom.toggleSideMenu);
@@ -21,6 +22,8 @@ export function initGlobalEventListeners() {
     });
 
     addGlobalEventListener('submit', '[data-form="create-project"]', handleCreateProjectFormSubmit);
+
+    addGlobalEventListener('submit', '[data-form="create-todo"]', handleCreateTodoFormSubmit);
 
     addGlobalEventListener('click', '[data-btn="show-project-view"]', (e) => {
         const projectBtn = e.target;
@@ -81,7 +84,7 @@ function handleCreateProjectFormSubmit(e) {
 }
 
 function isValidCreateProjectFormData(formData) {
-    return formData.name != null && formData.name.trim() !== '';
+    return isValidName(formData.name);
 }
 
 function formatCreateProjectFormData(formData) {
@@ -111,4 +114,56 @@ function handleProjectViewChange(project) {
 
 function getProjectBtn(project) {
     return document.querySelector(`li[data-project-id="${project.id}"]`)
+}
+
+function handleCreateTodoFormSubmit(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = dom.getTodoFormData();
+
+    if (!isValidTodoFormData(formData)) return;
+
+    const formatedFormData = formatTodoFormData(formData);
+    const projectId = ls.getSelectedProjectId();
+    const todo = new Todo(
+        formatedFormData.name,
+        formatedFormData.dueDate
+    );
+
+    addTodo(todo, projectId);
+
+    form.reset();
+
+    const modal = form.closest('.modal');
+    dom.closeModalAndHideOverlay(modal);
+}
+
+function addTodo(todo, projectId) {
+    // save todo to local storage
+    ls.addTodo(todo, projectId);
+
+    // get the updated project
+    const project = getProjectById(projectId);
+
+    dom.renderProjectView(project);
+    dom.updateTodoCount(project);
+}
+
+function isValidTodoFormData(formData) {
+    return isValidName(formData.name);
+}
+
+function isValidName(name) {
+    return name != null && name.trim() !== '';
+}
+
+function formatTodoFormData(formData) {
+    // clone the object
+    const formDataClone = { ...formData };
+
+    // format data
+    formDataClone.name = formDataClone.name.trim();
+
+    return formDataClone;
 }

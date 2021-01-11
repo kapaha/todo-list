@@ -38,13 +38,32 @@ export function createProjectViewComponent(project) {
 
     const container = fragment.querySelector('.project-view');
     const projectName = fragment.querySelector('.project-name');
+    const todoContainer = fragment.querySelector('[data-container="todo-container"]');
 
     container.dataset.projectId = project.id;
     projectName.textContent = project.name;
+
+    project.todoList.forEach(todo => {
+        const todoComponent = createTodoComponent(todo);
+        todoContainer.appendChild(todoComponent);
+    });
 
     return fragment;
 }
 
 export function createTodoComponent(todo) {
     const fragment = getFragmentFromTemplate(templates.todo);
+        const todoEl = fragment.querySelector('.todo');
+        const todoCheckbox = fragment.querySelector('[data-checkbox="todo"]');
+        const todoLabel = fragment.querySelector('[data-label="todo-checkbox"]');
+        const todoName = fragment.querySelector('.todo-name');
+        const todoDueDate = fragment.querySelector('.todo-due-date');
+
+        todoEl.dataset.todoId = todo.id;
+        todoCheckbox.id = `todo-checkbox-${todo.id}`;
+        todoLabel.setAttribute('for', `todo-checkbox-${todo.id}`);
+        todoName.textContent = todo.name;
+        todoDueDate.textContent = todo.dueDate;
+
+    return fragment;
 }

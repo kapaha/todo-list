@@ -81,6 +81,21 @@ export function highlightProjectBtn(btn) {
     btn.classList.add(HIGHLIGHT_PROJECT_CSS_CLASS);
 }
 
+export function updateTodoCount(project) {
+    const todoCount = document.querySelector(`[data-project-id="${project.id}"] [data-todo-count]`);
+    todoCount.textContent = project.todoList.length;
+}
+
+export function getTodoFormData() {
+    const todoName = elems.todoNameInput.value;
+    const todoDueDate = elems.todoDueDateInput.value;
+
+    return {
+        name: todoName,
+        dueDate: todoDueDate
+    }
+}
+
 const elems = {
     body: document.body,
     sideMenu: document.querySelector('[data-side-menu]'),
@@ -88,7 +103,9 @@ const elems = {
     projectsContainer: document.getElementById('projects-container'),
     projectNameInput: document.getElementById('input-project-name'),
     projectColorInput: document.getElementById('input-project-color'),
-    projectViewContainer: document.querySelector('[data-container="project-view"]')
+    projectViewContainer: document.querySelector('[data-container="project-view"]'),
+    todoNameInput: document.getElementById('input-todo-name'),
+    todoDueDateInput: document.getElementById('input-todo-due-date')
 };
 
 function showModal(modal) {

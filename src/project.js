@@ -1,4 +1,5 @@
 import { generateId } from './todoList';
+import { createDefaultTodos } from './todo';
 
 export default class Project {
     constructor(name, color) {
@@ -10,5 +11,12 @@ export default class Project {
 }
 
 export function createDefaultProject() {
-    return new Project('Default', 'grey');
+    const defaultProject = new Project('Default', 'grey');
+    const defaultTodos = createDefaultTodos();
+
+    defaultTodos.forEach(todo => {
+        defaultProject.todoList.push(todo);
+    });
+
+    return defaultProject;
 }

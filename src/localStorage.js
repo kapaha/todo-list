@@ -31,6 +31,18 @@ export function removeProject(projectId) {
     saveProjects(projects);
 }
 
+export function addTodo(todo, projectId) {
+    const projects = getProjects();
+
+    projects.forEach(project => {
+        if (project.id === projectId) {
+            project.todoList.push(todo);
+        }
+    });
+
+    saveProjects(projects);
+}
+
 function isLocalStorageKeyPopulated(key) {
     return !!localStorage.getItem(key)
 }
