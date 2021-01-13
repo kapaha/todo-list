@@ -48,6 +48,13 @@ export function initGlobalEventListeners() {
             dom.removeProjectView();
         }
     });
+
+    addGlobalEventListener('click', '[data-btn="delete-todo"]', (e) => {
+        const projectId = getClosestProjectId(e.target);
+        const todoId = getClosestTodoId(e.target);
+
+        deleteTodo(todoId, projectId)
+    });
 }
 
 export function getSelectedProject() {
@@ -166,4 +173,19 @@ function formatTodoFormData(formData) {
     formDataClone.name = formDataClone.name.trim();
 
     return formDataClone;
+}
+
+function getClosestTodoId(element) {
+    const todoEl = element.closest('[data-todo-id]');
+    return todoEl.dataset.todoId;
+}
+
+function deleteTodo(todoId, projectId) {
+    ls.deleteTodo(todoId, projectId);
+
+    // get the updated project
+    const project = getProjectById(projectId);
+
+    dom.renderProjectView(project);
+    dom.updateTodoCount(project);
 }
