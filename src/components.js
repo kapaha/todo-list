@@ -1,5 +1,6 @@
 import { getSelectedProjectId } from './localStorage';
 import { highlightProjectBtn } from './dom';
+import { getTodoCount } from './todoList';
 
 const templates = {
     project: document.querySelector('[data-template="project"'),
@@ -22,7 +23,7 @@ export function createProjectComponent(project) {
 
     projectEl.dataset.projectId = project.id;
     projectTitle.textContent = project.name;
-    todoCount.textContent = project.todoList.length;
+    todoCount.textContent = getTodoCount(project);
     projectColor.style.color = project.color;
 
     if (project.id === getSelectedProjectId()) {
@@ -61,6 +62,7 @@ export function createTodoComponent(todo) {
 
         todoEl.dataset.todoId = todo.id;
         todoCheckbox.id = `todo-checkbox-${todo.id}`;
+        todoCheckbox.checked = todo.isComplete ? true: false;
         todoLabel.setAttribute('for', `todo-checkbox-${todo.id}`);
         todoName.textContent = todo.name;
         todoDueDate.textContent = todo.dueDate;

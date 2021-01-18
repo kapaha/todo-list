@@ -1,5 +1,6 @@
 import * as comp from './components';
 import { getProjects } from './localStorage';
+import { getTodoCount } from './todoList'
 
 const HIGHLIGHT_PROJECT_CSS_CLASS = 'project-row-btn--highlight';
 
@@ -82,8 +83,10 @@ export function highlightProjectBtn(btn) {
 }
 
 export function updateTodoCount(project) {
-    const todoCount = document.querySelector(`[data-project-id="${project.id}"] [data-todo-count]`);
-    todoCount.textContent = project.todoList.length;
+    const todoCountEl = document.querySelector(`[data-project-id="${project.id}"] [data-todo-count]`);
+    const todoCount = getTodoCount(project);
+
+    todoCountEl.textContent = todoCount;
 }
 
 export function getTodoFormData() {

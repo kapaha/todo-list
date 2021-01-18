@@ -55,6 +55,8 @@ export function initGlobalEventListeners() {
 
         deleteTodo(todoId, projectId)
     });
+
+    addGlobalEventListener('change', '[data-checkbox="todo"]', handleTodoCheckboxChange);
 }
 
 export function getSelectedProject() {
@@ -64,6 +66,18 @@ export function getSelectedProject() {
 
 export function generateId() {
     return Date.now().toString();
+}
+
+export function editObject(object, properties) {
+    for (const property in properties) {
+        if (object.hasOwnProperty(property)) {
+            object[property] = properties[property];
+        }
+    }
+}
+
+export function getTodoCount(project) {
+    return project.todoList.filter(todo => !todo.isComplete).length || '';
 }
 
 function handleCreateProjectFormSubmit(e) {
@@ -187,5 +201,20 @@ function deleteTodo(todoId, projectId) {
     const project = getProjectById(projectId);
 
     dom.renderProjectView(project);
+    dom.updateTodoCount(project);
+}
+
+function handleTodoCheckboxChange(e) {
+    const checkbox = e.target;
+    const projectId = getClosestProjectId(checkbox);
+    const todoId = getClosestTodoId(checkbox);
+
+    if (checkbox.checked) {
+        ls.editTodo(todoId, projectId, { isComplete: true });
+    } else {
+        ls.editTodo(todoId, projectId, { isComplete: false });
+    }
+
+    const project = getProjectById(projectId);
     dom.updateTodoCount(project);
 }

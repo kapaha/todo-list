@@ -1,4 +1,5 @@
 import { createDefaultProject } from './project';
+import { editObject } from './todoList';
 
 const LOCAL_STORAGE_PROJECTS_KEY = 'todoList.projects'
 const LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY = 'todoList.selectedProjectId';
@@ -50,6 +51,22 @@ export function deleteTodo(todoId, projectId) {
         if (project.id === projectId) {
             project.todoList =
                 project.todoList.filter(todo => todo.id !== todoId);
+        }
+    });
+
+    saveProjects(projects);
+}
+
+export function editTodo(todoId, projectId, properties) {
+    let projects = getProjects();
+
+    projects.forEach(project => {
+        if (project.id === projectId) {
+            project.todoList.forEach(todo => {
+                if (todo.id === todoId) {
+                    editObject(todo, properties);
+                }
+            });
         }
     });
 
