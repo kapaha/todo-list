@@ -70,27 +70,29 @@
         </div>
     </div>
 
-    <div class="modal" id="modal-create-todo">
-        <header class="modal__header">
-            <h1 class="modal__title">Add Todo</h1>
-        </header>
-        <div class="modal__body">
-            <form class="modal_form" data-form="create-todo">
-                <div class="modal__form-group">
-                    <label for="input-todo-name">Name</label>
-                    <input type="text" id="input-todo-name">
-                </div>
-                <div class="modal__form-group">
-                    <label for="input-todo-due-date">Due Date</label>
-                    <input type="date" id="input-todo-due-date">
-                </div>
-                <button class="btn btn--cancel" type="button" data-btn="close-modal">Cancel</button>
-                <button class="btn btn--submit" type="submit">Add</button>
-            </form>
-        </div>
-    </div>
-
     <div id="overlay"></div>
+
+    <template data-template="modal-todo">
+        <div class="modal" id="">
+            <header class="modal__header">
+                <h1 class="modal__title"></h1>
+            </header>
+            <div class="modal__body">
+                <form class="modal_form" data-form="">
+                    <div class="modal__form-group">
+                        <label data-label="todo-name" for="">Name</label>
+                        <input data-input="todo-name" type="text" id="">
+                    </div>
+                    <div class="modal__form-group">
+                        <label data-label="todo-due-date" for="">Due Date</label>
+                        <input data-input="todo-due-date" type="date" id="">
+                    </div>
+                    <button class="btn btn--cancel" type="button" data-btn="close-modal">Cancel</button>
+                    <button class="btn btn--submit" type="submit"></button>
+                </form>
+            </div>
+        </div>
+    </template>
 
     <template data-template="project">
         <li class="project">
@@ -107,7 +109,7 @@
             <header>
                 <h1 class="project-name"></h1>
                 <div class="btn-row">
-                    <button class="btn-square btn-square--round" title="Add Todo" data-modal-target="#modal-create-todo">
+                    <button class="btn-square btn-square--round" title="Add Todo" data-modal-target="#modal-add-todo">
                         <i class="fas fa-plus"></i>
                     </button>
                     <button data-btn="delete-project" class="btn-square btn-square--round" title="Delete Project">
@@ -132,7 +134,7 @@
                 </div>
             </label>
             <div class="btn-row">
-                <button class="btn-square btn-square--round btn-todo" title="Edit">
+                <button data-btn="edit-todo" data-modal-target="#modal-edit-todo" class="btn-square btn-square--round btn-todo" title="Edit">
                     <i class="fas fa-edit"></i>
                 </button>
                 <button class="btn-square btn-square--round btn-todo" title="Delete" data-btn="delete-todo">
