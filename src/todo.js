@@ -11,8 +11,8 @@ export default class Todo {
 
 export function createDefaultTodos() {
     return [
-        new Todo('Brush Teeth', 'Jan 22 3:30 PM', 'defaultTodo1'),
-        new Todo('Make Breakfast', 'Today 12:00 PM', 'defaultTodo2'),
-        new Todo('Study', 'Tomorrow 9:00 PM', 'defaultTodo3'),
+        new Todo('Brush Teeth', '2022-01-02', 'defaultTodo1'),
+        new Todo('Make Breakfast', '', 'defaultTodo2'),
+        new Todo('Study', '2021-12-01', 'defaultTodo3'),
     ];
 }

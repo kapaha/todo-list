@@ -89,14 +89,21 @@ export function updateTodoCount(project) {
     todoCountEl.textContent = todoCount;
 }
 
-export function getTodoFormData() {
-    const todoName = elems.todoNameInput.value;
-    const todoDueDate = elems.todoDueDateInput.value;
+export function getTodoFormData(form) {
+    const todoName = form.querySelector('[data-input="todo-name"]').value;
+    const todoDueDate = form.querySelector('[data-input="todo-due-date"]').value;
 
     return {
         name: todoName,
         dueDate: todoDueDate
     }
+}
+
+export function renderModals() {
+    const modals = comp.createModals();
+    modals.forEach(modal => {
+        elems.body.append(modal);
+    });
 }
 
 const elems = {
@@ -107,8 +114,6 @@ const elems = {
     projectNameInput: document.getElementById('input-project-name'),
     projectColorInput: document.getElementById('input-project-color'),
     projectViewContainer: document.querySelector('[data-container="project-view"]'),
-    todoNameInput: document.getElementById('input-todo-name'),
-    todoDueDateInput: document.getElementById('input-todo-due-date')
 };
 
 function showModal(modal) {

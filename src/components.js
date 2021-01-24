@@ -5,12 +5,40 @@ import { getTodoCount } from './todoList';
 const templates = {
     project: document.querySelector('[data-template="project"'),
     projectView: document.querySelector('[data-template="project-view"]'),
-    todo: document.querySelector('[data-template="todo"]')
+    todo: document.querySelector('[data-template="todo"]'),
+    todoModal: document.querySelector('[data-template="modal-todo"]')
 }
 
 function getFragmentFromTemplate(template) {
     if (template == null) return
     return document.importNode(template.content, true);
+}
+
+function createTodoModal(modalId, modalTitleText, formDatasetForm, todoNameInputId, todoDueDateInputId, submitBtnText) {
+    const fragment = getFragmentFromTemplate(templates.todoModal);
+
+    const modal = fragment.querySelector('.modal');
+    const modalTitle = fragment.querySelector('.modal__title');
+    const form = fragment.querySelector('form');
+    const todoNameLabel = form.querySelector('[data-label="todo-name"]');
+    const todoNameInput = form.querySelector('[data-input="todo-name"]');
+    const todoDueDateLabel = form.querySelector('[data-label="todo-due-date"]');
+    const todoDueDateInput = form.querySelector('[data-input="todo-due-date"]');
+    const submitBtn = form.querySelector('[type="submit"]');
+
+    modal.id = modalId;
+    todoNameInput.id = todoNameInputId;
+    todoDueDateInput.id = todoDueDateInputId;
+
+    form.dataset.form = formDatasetForm;
+
+    todoNameLabel.setAttribute('for', todoNameInputId);
+    todoDueDateLabel.setAttribute('for', todoDueDateInputId);
+
+    modalTitle.textContent = modalTitleText;
+    submitBtn.textContent = submitBtnText;
+
+    return fragment;
 }
 
 export function createProjectComponent(project) {
@@ -68,4 +96,29 @@ export function createTodoComponent(todo) {
         todoDueDate.textContent = todo.dueDate;
 
     return fragment;
+}
+
+export function createModals() {
+    const modals = [];
+
+    const addTodoModal = createTodoModal(
+        'modal-add-todo',
+        'Add Todo',
+        'add-todo',
+        'input-add-todo-name',
+        'input-add-todo-due-date',
+        'Add'
+    );
+    const editTodoModal = createTodoModal(
+        'modal-edit-todo',
+        'Edit Todo',
+        'edit-todo',
+        'input-edit-todo-name',
+        'input-edit-todo-due-date',
+        'Edit'
+    );
+
+    modals.push(addTodoModal, editTodoModal);
+
+    return modals;
 }

@@ -1,9 +1,10 @@
 import { initGlobalEventListeners, getSelectedProject } from './todoList';
-import { renderProjects, renderProjectView } from './dom';
+import { renderModals, renderProjects, renderProjectView } from './dom';
 
 init();
 
 function init() {
+    renderModals();
     renderProjects();
     renderProjectView(getSelectedProject());
     initGlobalEventListeners();

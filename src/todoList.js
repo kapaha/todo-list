@@ -8,8 +8,16 @@ export function initGlobalEventListeners() {
     addGlobalEventListener('click', '[data-header-toggle]', dom.toggleSideMenu);
 
     addGlobalEventListener('click', '[data-modal-target]', (e) => {
-        // get targeted modal
-        const modal = document.querySelector(e.target.dataset.modalTarget);
+        const el = e.target;
+        const modal = document.querySelector(el.dataset.modalTarget);
+
+        if (el.dataset.btn === "edit-todo") {
+            const projectId = getClosestProjectId(el);
+            const todoId = getClosestTodoId(el);
+            const todo = getTodoById(projectId, todoId);
+            populateTodoForm(todo, modal);
+        }
+
         dom.showModalAndOverlay(modal);
     });
 
@@ -23,7 +31,9 @@ export function initGlobalEventListeners() {
 
     addGlobalEventListener('submit', '[data-form="create-project"]', handleCreateProjectFormSubmit);
 
-    addGlobalEventListener('submit', '[data-form="create-todo"]', handleCreateTodoFormSubmit);
+    addGlobalEventListener('submit', '[data-form="add-todo"]', handleAddTodoForm);
+
+    addGlobalEventListener('submit', '[data-form="edit-todo"]', handleEditTodoForm);
 
     addGlobalEventListener('click', '[data-btn="show-project-view"]', (e) => {
         const projectBtn = e.target;
@@ -127,6 +137,11 @@ function getProjectById(projectId) {
     return ls.getProjects().filter(project => project.id === projectId)[0];
 }
 
+function getTodoById(projectId, todoId) {
+    const project = getProjectById(projectId);
+    return project.todoList.filter(todo => todo.id === todoId)[0];
+}
+
 function handleProjectViewChange(project) {
     ls.saveSelectedProjectId(project.id);
     dom.highlightProjectBtn(getProjectBtn(project));
@@ -137,11 +152,11 @@ function getProjectBtn(project) {
     return document.querySelector(`li[data-project-id="${project.id}"]`)
 }
 
-function handleCreateTodoFormSubmit(e) {
+function handleAddTodoForm(e) {
     e.preventDefault();
 
     const form = e.target;
-    const formData = dom.getTodoFormData();
+    const formData = dom.getTodoFormData(form);
 
     if (!isValidTodoFormData(formData)) return;
 
@@ -151,12 +166,36 @@ function handleCreateTodoFormSubmit(e) {
         formatedFormData.name,
         formatedFormData.dueDate
     );
+    const modal = form.closest('.modal');
 
     addTodo(todo, projectId);
 
     form.reset();
+    dom.closeModalAndHideOverlay(modal);
+}
 
+function handleEditTodoForm(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = dom.getTodoFormData(form);
+
+    if (!isValidTodoFormData(formData)) return;
+
+    const formatedFormData = formatTodoFormData(formData);
+    const projectId = ls.getSelectedProjectId();
+    const todoId = getClosestTodoId(form);
     const modal = form.closest('.modal');
+
+    ls.editTodo(todoId, projectId, {
+        name: formatedFormData.name,
+        dueDate: formatedFormData.dueDate
+    });
+
+    const project = getProjectById(projectId);
+
+    form.reset();
+    dom.renderProjectView(project);
     dom.closeModalAndHideOverlay(modal);
 }
 
@@ -217,4 +256,14 @@ function handleTodoCheckboxChange(e) {
 
     const project = getProjectById(projectId);
     dom.updateTodoCount(project);
+}
+
+function populateTodoForm(todo, modal) {
+    const todoNameInput = modal.querySelector('#input-edit-todo-name');
+    const todoDueDateInput = modal.querySelector('#input-edit-todo-due-date');
+
+    modal.dataset.todoId = todo.id;
+
+    todoNameInput.value = todo.name;
+    todoDueDateInput.value = todo.dueDate;
 }
