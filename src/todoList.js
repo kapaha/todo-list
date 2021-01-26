@@ -3,7 +3,7 @@ import * as dom from './dom';
 import Project from './project';
 import * as ls from './localStorage';
 import Todo from './todo';
-import { format, isThisYear, isToday, isTomorrow, isYesterday } from 'date-fns';
+import { format, isThisYear, isToday, isTomorrow, isYesterday, isPast } from 'date-fns';
 
 export function initGlobalEventListeners() {
     addGlobalEventListener('click', '[data-header-toggle]', dom.toggleSideMenu);
@@ -106,6 +106,18 @@ export function formatDate(date) {
 
 export function formatDateForDatePicker(date) {
     return format(date, 'yyyy-MM-dd');
+}
+
+export function getDateColor(date) {
+    const greenColor = '#2ecc71';
+    const yellowColor = '#f1c40f';
+    const redColor = '#c0392b';
+
+    const newDate = new Date(date);
+
+    if (isToday(newDate)) return greenColor;
+    if (isTomorrow(newDate)) return yellowColor;
+    if (isPast(newDate)) return redColor;
 }
 
 function handleCreateProjectFormSubmit(e) {

@@ -1,6 +1,6 @@
 import { getSelectedProjectId } from './localStorage';
 import { highlightProjectBtn } from './dom';
-import { getTodoCount, formatDate } from './todoList';
+import { getTodoCount, formatDate, getDateColor } from './todoList';
 
 const templates = {
     project: document.querySelector('[data-template="project"'),
@@ -94,6 +94,7 @@ export function createTodoComponent(todo) {
         todoLabel.setAttribute('for', `todo-checkbox-${todo.id}`);
         todoName.textContent = todo.name;
         todoDueDate.textContent = formatDate(todo.dueDate);
+        todoDueDate.style.color = getDateColor(todo.dueDate);
 
     return fragment;
 }
