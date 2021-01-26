@@ -3,6 +3,7 @@ import * as dom from './dom';
 import Project from './project';
 import * as ls from './localStorage';
 import Todo from './todo';
+import { format, isThisYear, isToday, isTomorrow, isYesterday } from 'date-fns';
 
 export function initGlobalEventListeners() {
     addGlobalEventListener('click', '[data-header-toggle]', dom.toggleSideMenu);
@@ -88,6 +89,23 @@ export function editObject(object, properties) {
 
 export function getTodoCount(project) {
     return project.todoList.filter(todo => !todo.isComplete).length || '';
+}
+
+export function formatDate(date) {
+    if (date === '') return date;
+
+    const newDate = new Date(date);
+
+    if (isToday(newDate)) return 'Today';
+    if (isTomorrow(newDate)) return 'Tomorrow';
+    if (isYesterday(newDate)) return 'Yesterday';
+    if (isThisYear(newDate)) return format(newDate, 'do MMM');
+
+    return format(newDate, 'do MMM yyyy');
+}
+
+export function formatDateForDatePicker(date) {
+    return format(date, 'yyyy-MM-dd');
 }
 
 function handleCreateProjectFormSubmit(e) {
