@@ -6,7 +6,7 @@ export default class Todo {
         this.name = name;
         this.dueDate = dueDate;
         this.isComplete = false;
-        this.id = id || generateId();
+        this.id = generateId();
     }
 }
 
@@ -18,10 +18,10 @@ export function createDefaultTodos() {
     const startOfNextYearDate = formatDateForDatePicker(add(endOfYear(startOfToday()), { days: 1 }));
 
     return [
-        new Todo('Pay Bills', yesterdayDate, 'defaultTodo1'),
-        new Todo('Grocery Shopping', todayDate, 'defaultTodo2'),
-        new Todo('Visit Best Friend', tomorrowDate, 'defaultTodo3'),
-        new Todo('Prep for New Years party', endOfYearDate, 'defaultTodo4'),
-        new Todo('Write down New Years resolutions', startOfNextYearDate, 'defaultTodo5')
+        new Todo('Pay Bills', yesterdayDate),
+        new Todo('Grocery Shopping', todayDate),
+        new Todo('Visit Best Friend', tomorrowDate),
+        new Todo('Prep for New Years party', endOfYearDate),
+        new Todo('Write down New Years resolutions', startOfNextYearDate)
     ];
 }

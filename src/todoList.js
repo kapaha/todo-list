@@ -4,6 +4,7 @@ import Project from './project';
 import * as ls from './localStorage';
 import Todo from './todo';
 import { format, isThisYear, isToday, isTomorrow, isYesterday, isPast } from 'date-fns';
+import { v4 as uuidv4 } from 'uuid';
 
 export function initGlobalEventListeners() {
     addGlobalEventListener('click', '[data-header-toggle]', dom.toggleSideMenu);
@@ -76,7 +77,7 @@ export function getSelectedProject() {
 }
 
 export function generateId() {
-    return Date.now().toString();
+    return uuidv4();
 }
 
 export function editObject(object, properties) {
