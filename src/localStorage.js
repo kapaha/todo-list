@@ -73,6 +73,30 @@ export function editTodo(todoId, projectId, properties) {
     saveProjects(projects);
 }
 
+export function editProject(projectId, properties) {
+    let projects = getProjects();
+
+    projects.forEach(project => {
+        if (project.id === projectId) {
+            editObject(project, properties)
+        }
+    });
+
+    saveProjects(projects);
+}
+
+export function sortTodos(projectId) {
+    let projects = getProjects();
+
+    projects.forEach(project => {
+        if (project.id === projectId) {
+            project.todoList = project.todoList.sort((a, b) => a.isComplete - b.isComplete);
+        }
+    });
+
+    saveProjects(projects);
+}
+
 function isLocalStorageKeyPopulated(key) {
     return !!localStorage.getItem(key)
 }

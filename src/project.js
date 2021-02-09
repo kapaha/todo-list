@@ -7,6 +7,7 @@ export default class Project {
         this.color = color;
         this.id = generateId();
         this.todoList = [];
+        this.showCompleteTodos = false;
     }
 }
 

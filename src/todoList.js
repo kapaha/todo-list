@@ -69,6 +69,8 @@ export function initGlobalEventListeners() {
     });
 
     addGlobalEventListener('change', '[data-checkbox="todo"]', handleTodoCheckboxChange);
+
+    addGlobalEventListener('click', '[data-btn="toggle-complete-todos"]', handleToggleCompleteTodos);
 }
 
 export function getSelectedProject() {
@@ -276,16 +278,18 @@ function deleteTodo(todoId, projectId) {
 
 function handleTodoCheckboxChange(e) {
     const checkbox = e.target;
+    const todoEl = checkbox.closest('.todo');
     const projectId = getClosestProjectId(checkbox);
     const todoId = getClosestTodoId(checkbox);
 
-    if (checkbox.checked) {
-        ls.editTodo(todoId, projectId, { isComplete: true });
-    } else {
-        ls.editTodo(todoId, projectId, { isComplete: false });
-    }
+    todoEl.classList.toggle('todo--complete')
+
+    ls.editTodo(todoId, projectId, { isComplete: checkbox.checked ? true : false });
+    ls.sortTodos(projectId);
 
     const project = getProjectById(projectId);
+
+    dom.renderProjectView(project);
     dom.updateTodoCount(project);
 }
 
@@ -297,4 +301,20 @@ function populateTodoForm(todo, modal) {
 
     todoNameInput.value = todo.name;
     todoDueDateInput.value = todo.dueDate;
+}
+
+function handleToggleCompleteTodos(e) {
+    const eyeBtn = e.target
+    const eyeIcon = eyeBtn.querySelector('.fas');
+    const projectId = getClosestProjectId(eyeBtn);
+    const showCompleteTodos = eyeIcon.classList.contains('fa-eye') ? true : false;
+
+    ls.editProject(
+        projectId,
+        { showCompleteTodos: showCompleteTodos }
+    );
+
+    dom.toggleTodoContainerDisplay();
+    dom.toggleEyeIcon(eyeIcon);
+    dom.setEyeBtnTitle(eyeBtn, showCompleteTodos);
 }

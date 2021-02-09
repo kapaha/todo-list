@@ -214,6 +214,10 @@ button:focus {
     border-bottom: 1px solid var(--secondary-font-color);
 }
 
+.project-view .todo.todo--complete {
+    display: var(--complete-todo-display);
+}
+
 .todo-container > * + * {
     margin-top: var(--todo-spacing);
 }

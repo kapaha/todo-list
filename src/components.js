@@ -1,5 +1,5 @@
 import { getSelectedProjectId } from './localStorage';
-import { highlightProjectBtn } from './dom';
+import { highlightProjectBtn, setEyeBtnTitle, toggleEyeIcon} from './dom';
 import { getTodoCount, formatDate, getDateColor } from './todoList';
 
 const templates = {
@@ -68,6 +68,8 @@ export function createProjectViewComponent(project) {
     const container = fragment.querySelector('.project-view');
     const projectName = fragment.querySelector('.project-name');
     const todoContainer = fragment.querySelector('[data-container="todo-container"]');
+    const eyeBtn = fragment.querySelector('[data-btn="toggle-complete-todos"]');
+    const eyeIcon = fragment.querySelector('.fa-eye')
 
     container.dataset.projectId = project.id;
     projectName.textContent = project.name;
@@ -76,6 +78,15 @@ export function createProjectViewComponent(project) {
         const todoComponent = createTodoComponent(todo);
         todoContainer.appendChild(todoComponent);
     });
+
+    if (project.showCompleteTodos) {
+        toggleEyeIcon(eyeIcon);
+        todoContainer.style.setProperty("--complete-todo-display", 'flex');
+    } else {
+        todoContainer.style.setProperty("--complete-todo-display", 'none');
+    }
+
+    setEyeBtnTitle(eyeBtn, project.showCompleteTodos);
 
     return fragment;
 }
@@ -89,6 +100,7 @@ export function createTodoComponent(todo) {
         const todoDueDate = fragment.querySelector('.todo-due-date');
 
         todoEl.dataset.todoId = todo.id;
+        if (todo.isComplete) todoEl.classList.add('todo--complete');
         todoCheckbox.id = `todo-checkbox-${todo.id}`;
         todoCheckbox.checked = todo.isComplete ? true: false;
         todoLabel.setAttribute('for', `todo-checkbox-${todo.id}`);

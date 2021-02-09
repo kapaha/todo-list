@@ -106,6 +106,32 @@ export function renderModals() {
     });
 }
 
+export function toggleTodoContainerDisplay() {
+    const todoContainer = elems.projectViewContainer.querySelector('[data-container="todo-container"]');
+    const completeTodoDisplay = getComputedStyle(todoContainer)
+        .getPropertyValue('--complete-todo-display')
+        .trim();
+
+    todoContainer.style.setProperty(
+        "--complete-todo-display",
+        completeTodoDisplay === "none" ? "flex" : "none"
+    );
+}
+
+export function toggleEyeIcon(element) {
+    element.classList.toggle('fa-eye');
+    element.classList.toggle('fa-eye-slash');
+}
+
+export function setEyeBtnTitle(eyeBtn, showCompleteTodos) {
+    const showCompleteTodosText = 'Show Complete Todos';
+    const hideCompleteTodosText = 'Hide Complete Todos';
+
+    const titleText = showCompleteTodos ? hideCompleteTodosText : showCompleteTodosText;
+
+    eyeBtn.setAttribute('title', titleText);
+}
+
 const elems = {
     body: document.body,
     sideMenu: document.querySelector('[data-side-menu]'),
