@@ -143,6 +143,7 @@ function handleCreateProjectFormSubmit(e) {
 
     const modal = form.closest('.modal');
     dom.closeModalAndHideOverlay(modal);
+    dom.closeSideMenuMobile();
 }
 
 function isValidCreateProjectFormData(formData) {

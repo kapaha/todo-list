@@ -132,6 +132,10 @@ export function setEyeBtnTitle(eyeBtn, showCompleteTodos) {
     eyeBtn.setAttribute('title', titleText);
 }
 
+export function closeSideMenuMobile() {
+    elems.sideMenu.classList.remove('mobile-open');
+}
+
 const elems = {
     body: document.body,
     sideMenu: document.querySelector('[data-side-menu]'),
