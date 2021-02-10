@@ -41,6 +41,8 @@ export function initGlobalEventListeners() {
         const projectBtn = e.target;
         const projectId = getClosestProjectId(projectBtn);
 
+        dom.closeSideMenuMobile();
+
         // return if project is already selected
         if (projectId === ls.getSelectedProjectId()) return;
 
@@ -177,7 +179,6 @@ function getTodoById(projectId, todoId) {
 function handleProjectViewChange(project) {
     ls.saveSelectedProjectId(project.id);
     dom.highlightProjectBtn(getProjectBtn(project));
-    dom.closeSideMenuMobile();
     dom.renderProjectView(project);
 }
 

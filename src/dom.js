@@ -67,10 +67,13 @@ export function renderProjects() {
 }
 
 export function renderProjectView(project) {
-    if (project == null) return;
-    const projectViewComponent = comp.createProjectViewComponent(project);
-    removeProjectView();
-    elems.projectViewContainer.appendChild(projectViewComponent);
+    if (project == null) {
+        openSideMenuMobile();
+    } else {
+        const projectViewComponent = comp.createProjectViewComponent(project);
+        removeProjectView();
+        elems.projectViewContainer.appendChild(projectViewComponent);
+    }
 }
 
 export function removeProjectView() {
@@ -134,6 +137,10 @@ export function setEyeBtnTitle(eyeBtn, showCompleteTodos) {
 
 export function closeSideMenuMobile() {
     elems.sideMenu.classList.remove('mobile-open');
+}
+
+export function openSideMenuMobile() {
+    elems.sideMenu.classList.add('mobile-open');
 }
 
 const elems = {
