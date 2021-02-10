@@ -59,8 +59,10 @@ export function initGlobalEventListeners() {
 
         if (projectId === ls.getSelectedProjectId()) {
             ls.removeSelectedProjectId();
+            dom.openSideMenuMobile();
             dom.removeProjectView();
         }
+
     });
 
     addGlobalEventListener('click', '[data-btn="delete-todo"]', (e) => {
