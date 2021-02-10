@@ -84,9 +84,7 @@ export function generateId() {
 
 export function editObject(object, properties) {
     for (const property in properties) {
-        if (object.hasOwnProperty(property)) {
-            object[property] = properties[property];
-        }
+        object[property] = properties[property];
     }
 }
 
