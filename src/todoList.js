@@ -177,6 +177,7 @@ function getTodoById(projectId, todoId) {
 function handleProjectViewChange(project) {
     ls.saveSelectedProjectId(project.id);
     dom.highlightProjectBtn(getProjectBtn(project));
+    dom.closeSideMenuMobile();
     dom.renderProjectView(project);
 }
 
