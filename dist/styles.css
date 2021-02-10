@@ -127,12 +127,9 @@ button:focus {
 
 .side-menu .section-header {
     display: flex;
+    justify-content: space-between;
     margin-bottom: 0.5em;
     font-size: 1.5rem;
-}
-
-.side-menu .section-expand-btn {
-    display: flex;
     align-items: center;
     padding: 0.2em 0.3em;
     width: 100%;
