@@ -2,10 +2,12 @@
 
 :root {
     --main-bg-color: #1F1F1F;
+    --accent-color: #282828;
     --main-font-color: #fff;
     --secondary-font-color: #848484;
     --sidebar-width: 100vw;
     --hover: #333333;
+    --orange-color: #e67e22;
 
     --header-height: 3rem;
     --z-fixed: 100;
@@ -53,7 +55,23 @@ button > * {
     pointer-events: none;
 }
 
-button:focus {
+.btn {
+    display: inline-block;
+    border: solid 1px transparent;
+    border-radius: 0.25em;
+    padding: 0.6em 1.5em;
+    transition: opacity 150ms ease-in-out;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.btn:focus {
     outline: none;
     border: 1px solid #fff;
 }
@@ -63,19 +81,18 @@ button:focus {
     width: var(--size);
     height: var(--size);
     min-width: var(--size);
-    transition: background-color 300ms ease-in-out;
-}
-
-.btn-square:hover {
-    background-color: var(--hover);
-}
-
-.btn-square:active {
-    transform: translateY(1px);
 }
 
 .btn-square--round {
     border-radius: 0.25em;
+}
+
+.btn--submit {
+    background-color: var(--orange-color);
+}
+
+.btn--cancel {
+    background-color: var(--hover);
 }
 
 /* header */
@@ -303,8 +320,10 @@ label:hover .custom-checkbox,
     border-radius: 10px;
     z-index: var(--z-modal);
     background-color: #fff;
-    width: 500px;
+    width: 400px;
     max-width: 80%;
+    background-color: var(--accent-color);
+    color: white;
 }
 
 .modal--active {
@@ -313,19 +332,68 @@ label:hover .custom-checkbox,
 
 .modal__header {
     padding: 10px 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--hover);
+    background-color: var(--main-bg-color);
+    border-radius: 10px 10px 0 0;
 }
 
 .modal__title {
     font-size: 1.25rem;
-    font-weight: bold;
+    font-weight: 400;
 }
 
 .modal__body {
     padding: 10px 15px;
+}
+
+.modal__form > * + * {
+    margin-top: 1rem;
+}
+
+.modal__form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal__form-group label {
+    padding: 0.5em 0;
+    font-size: 0.9rem;
+}
+
+.modal__form-group input,
+.modal__form-group select {
+    padding: 0.25em;
+    font-size: 1rem;
+    border-radius: 0.25em;
+    background-color: var(--main-bg-color);
+    color: white;
+    font-family: inherit;
+    border: 1px solid var(--hover);
+    transition: border-color 0.15s ease-in-out;
+}
+
+.modal__form-group input:hover,
+.modal__form-group select:hover {
+    border-color: white;
+}
+
+.modal__form-group input:focus,
+.modal__form-group select:focus {
+    outline: none;
+    border-color: white;
+}
+
+.modal__btn-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.modal__btn-group > .btn {
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 
 #overlay {

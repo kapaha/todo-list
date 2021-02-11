@@ -38,7 +38,7 @@
             <h1 class="modal__title">Add Project</h1>
         </header>
         <div class="modal__body">
-            <form class="modal_form" data-form="create-project">
+            <form class="modal__form" data-form="create-project" autocomplete="off">
                 <div class="modal__form-group">
                     <label for="input-project-name">Project Name</label>
                     <input type="text" id="input-project-name" required>
@@ -55,8 +55,10 @@
                         <option selected data-css-color="grey">Grey</option>
                     </select>
                 </div>
-                <button class="btn btn--cancel" type="button" data-btn="close-modal">Cancel</button>
-                <button class="btn btn--submit" type="submit">Add</button>
+                <div class="modal__btn-group">
+                    <button class="btn btn--cancel" type="button" data-btn="close-modal">Cancel</button>
+                    <button class="btn btn--submit" type="submit">Add</button>
+                </div>
             </form>
         </div>
     </div>
@@ -64,12 +66,12 @@
     <div id="overlay"></div>
 
     <template data-template="modal-todo">
-        <div class="modal" id="">
+        <div class="modal">
             <header class="modal__header">
                 <h1 class="modal__title"></h1>
             </header>
             <div class="modal__body">
-                <form class="modal_form" data-form="">
+                <form class="modal__form" data-form="" autocomplete="off">
                     <div class="modal__form-group">
                         <label data-label="todo-name" for="">Name</label>
                         <input data-input="todo-name" type="text" id="" required>
@@ -78,8 +80,10 @@
                         <label data-label="todo-due-date" for="">Due Date</label>
                         <input data-input="todo-due-date" type="date" id="">
                     </div>
-                    <button class="btn btn--cancel" type="button" data-btn="close-modal">Cancel</button>
-                    <button class="btn btn--submit" type="submit"></button>
+                    <div class="modal__btn-group">
+                        <button class="btn btn--cancel" type="button" data-btn="close-modal">Cancel</button>
+                        <button class="btn btn--submit" type="submit"></button>
+                    </div>
                 </form>
             </div>
         </div>
