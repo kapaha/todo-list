@@ -58,7 +58,7 @@ button > * {
 .btn {
     display: inline-block;
     border: solid 1px transparent;
-    border-radius: 0.25em;
+    border-radius: 0.2em;
     padding: 0.6em 1.5em;
     transition: opacity 150ms ease-in-out;
 }
@@ -76,15 +76,12 @@ button > * {
     border: 1px solid #fff;
 }
 
-.btn-square {
+.btn--square {
+    padding: 0;
     --size: 2em;
     width: var(--size);
     height: var(--size);
     min-width: var(--size);
-}
-
-.btn-square--round {
-    border-radius: 0.25em;
 }
 
 .btn--submit {
@@ -168,6 +165,7 @@ button > * {
     text-align: left;
     font-size: 1rem;
     word-break: break-all;
+    border-radius: 0;
 }
 
 .side-menu .project-row-btn:hover {
