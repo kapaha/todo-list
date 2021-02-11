@@ -21,7 +21,7 @@
         <section>
             <header class="section-header">
                 <span class="section-title">Projects</span>
-                <button data-modal-target="#modal-create-project" class="btn-square btn-square--small" title="Add Project"><i class="fas fa-plus"></i></button>
+                <button data-modal-target="#modal-create-project" class="btn btn--square" title="Add Project"><i class="fas fa-plus"></i></button>
             </header>
             <ul id="projects-container" class="projects-container">
                 <!-- new projects generated with JS -->
@@ -91,7 +91,7 @@
 
     <template data-template="project">
         <li class="project">
-            <button data-btn="show-project-view" class="project-row-btn">
+            <button data-btn="show-project-view" class="btn project-row-btn">
                 <span class="project-color">&#9679;</span>
                 <span class="project-name"></span>
                 <span class="todo-count" data-todo-count></span>
@@ -104,13 +104,13 @@
             <header>
                 <h1 class="project-name"></h1>
                 <div class="btn-row">
-                    <button class="btn-square btn-square--round" title="Add Todo" data-modal-target="#modal-add-todo">
+                    <button class="btn btn--square" title="Add Todo" data-modal-target="#modal-add-todo">
                         <i class="fas fa-plus"></i>
                     </button>
-                    <button class="btn-square btn-square--round" data-btn="toggle-complete-todos">
+                    <button class="btn btn--square" data-btn="toggle-complete-todos">
                         <i class="fas fa-eye"></i>
                     </button>
-                    <button data-btn="delete-project" class="btn-square btn-square--round" title="Delete Project">
+                    <button data-btn="delete-project" class="btn btn--square" title="Delete Project">
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </div>
@@ -132,10 +132,10 @@
                 </div>
             </label>
             <div class="btn-row">
-                <button data-btn="edit-todo" data-modal-target="#modal-edit-todo" class="btn-square btn-square--round btn-todo" title="Edit">
+                <button data-btn="edit-todo" data-modal-target="#modal-edit-todo" class="btn btn--square" title="Edit">
                     <i class="fas fa-edit"></i>
                 </button>
-                <button class="btn-square btn-square--round btn-todo" title="Delete" data-btn="delete-todo">
+                <button class="btn btn--square" title="Delete" data-btn="delete-todo">
                     <i class="fas fa-trash-alt"></i>
                 </button>
             </div>
