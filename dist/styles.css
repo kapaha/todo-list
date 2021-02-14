@@ -237,7 +237,10 @@ button > * {
 .project-view .todo-info {
     display: flex;
     flex-direction: column;
-    gap: 0.75em;
+}
+
+.project-view .todo-info > * + * {
+    margin-top: 0.75em;
 }
 
 .project-view .todo-due-date {
@@ -246,7 +249,10 @@ button > * {
 
 .btn-row {
     display: flex;
-    gap: 0.3em;
+}
+
+.btn-row > * + * {
+    margin-left: 0.5em;
 }
 
 .todo label {
@@ -381,8 +387,11 @@ label:hover .custom-checkbox,
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 1rem;
     margin-top: 1.5rem;
+}
+
+.modal__btn-group > * + * {
+    margin-left: 1rem;
 }
 
 .modal__btn-group > .btn {
