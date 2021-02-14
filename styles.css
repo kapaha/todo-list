@@ -196,11 +196,11 @@ button > * {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3em;
+    padding: 1.5em 1em;
 }
 
 .project-view {
-    width: 75%;
+    width: 100%;
     max-width: 800px;
 }
 
@@ -209,7 +209,7 @@ button > * {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
 }
 
 .project-view .project-name {
@@ -218,7 +218,7 @@ button > * {
 }
 
 .project-view .todo {
-    --todo-spacing: 0.8em;
+    --todo-spacing: 1em;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -237,7 +237,7 @@ button > * {
 .project-view .todo-info {
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
+    gap: 0.75em;
 }
 
 .project-view .todo-due-date {
@@ -246,12 +246,8 @@ button > * {
 
 .btn-row {
     display: flex;
+    gap: 0.3em;
 }
-
-.btn-row > * + * {
-    margin-left: 0.3em;
-}
-
 
 .todo label {
     display: flex;
@@ -434,5 +430,9 @@ label:hover .custom-checkbox,
 
     .side-menu {
         top: calc(var(--header-height) + 1rem);
+    }
+
+    .project-view-container {
+        padding: 3em;
     }
 }
