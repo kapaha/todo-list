@@ -99,6 +99,14 @@ button > * {
     background-color: var(--color-grey-light);
 }
 
+.btn-row {
+    display: flex;
+}
+
+.btn-row > * + * {
+    margin-left: 0.5em;
+}
+
 /* || Header */
 
 .header {
@@ -255,14 +263,6 @@ button > * {
 
 .project-view .todo-due-date {
     color: var(--color-grey-lighter);
-}
-
-.btn-row {
-    display: flex;
-}
-
-.btn-row > * + * {
-    margin-left: 0.5em;
 }
 
 .todo label {
