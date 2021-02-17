@@ -42,6 +42,7 @@ export function addTodo(todo, projectId) {
     });
 
     saveProjects(projects);
+    sortTodos(projectId);
 }
 
 export function deleteTodo(todoId, projectId) {
@@ -71,6 +72,7 @@ export function editTodo(todoId, projectId, properties) {
     });
 
     saveProjects(projects);
+    sortTodos(projectId);
 }
 
 export function editProject(projectId, properties) {

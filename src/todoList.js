@@ -288,7 +288,6 @@ function handleTodoCheckboxChange(e) {
     todoEl.classList.toggle('todo--complete')
 
     ls.editTodo(todoId, projectId, { isComplete: checkbox.checked ? true : false });
-    ls.sortTodos(projectId);
 
     const project = getProjectById(projectId);
 
