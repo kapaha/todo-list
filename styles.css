@@ -19,6 +19,8 @@
     --z-modal: 300;
 }
 
+/* || General Styles */
+
 *,
 *::before,
 *::after {
@@ -30,7 +32,6 @@
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: var(--color-grey-dark);
-
     position: relative;
     margin-top: var(--header-height);
     padding: 0 1rem;
@@ -58,6 +59,8 @@ button {
 button > * {
     pointer-events: none;
 }
+
+/* || Button styles */
 
 .btn {
     display: inline-block;
@@ -96,7 +99,8 @@ button > * {
     background-color: var(--color-grey-light);
 }
 
-/* header */
+/* || Header */
+
 .header {
     width: 100%;
     height: var(--header-height);
@@ -119,7 +123,8 @@ button > * {
     cursor: pointer;
 }
 
-/* side menu */
+/* || Side Menu */
+
 .side-menu {
     background-color: var(--color-grey);
     color: var(--color-white);
@@ -193,7 +198,8 @@ button > * {
     font-size: 0.8em;
 }
 
-/* project view */
+/* || Project view */
+
 .project-view-container {
     background-color: var(--color-grey-dark);
     color: var(--color-white);
@@ -270,7 +276,8 @@ button > * {
     padding-bottom: var(--todo-spacing);
 }
 
-/* custom checkbox styles */
+/* || Custom checkbox */
+
 .hide-checkbox {
     opacity: 0;
     position: absolute;
@@ -312,6 +319,8 @@ label:hover .custom-checkbox,
 [type="checkbox"]:checked + label .todo-name {
     text-decoration: line-through;
 }
+
+/* || Modal */
 
 .modal {
     position: fixed;
@@ -402,6 +411,8 @@ label:hover .custom-checkbox,
     font-weight: 600;
 }
 
+/* || Overlay */
+
 #overlay {
     position: fixed;
     z-index: var(--z-overlay);
@@ -420,9 +431,10 @@ label:hover .custom-checkbox,
     pointer-events: all;
 }
 
+/* || Media queries */
 
-/* media queries */
-/* desktop */
+/* || Media queries - Desktop */
+
 @media screen and (min-width: 768px) {
     :root {
         --sidebar-width: 420px;
