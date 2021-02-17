@@ -1,14 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
 :root {
-    --main-bg-color: #1F1F1F;
-    --accent-color: #282828;
-    --main-font-color: #fff;
-    --secondary-font-color: #848484;
-    --sidebar-width: 100vw;
-    --hover: #333333;
-    --orange-color: #e67e22;
+    --color-grey-dark: #1F1F1F;
+    --color-grey: #282828;
+    --color-grey-light: #333333;
+    --color-grey-lighter: #848484;
+    --color-white: #fff;
+    --color-black: #000;
+    --color-orange: #e67e22;
+    --color-green: #2ecc71;
+    --color-yellow: #f1c40f;
+    --color-red: #c0392b;
 
+    --sidebar-width: 100vw;
     --header-height: 3rem;
     --z-fixed: 100;
     --z-overlay: 200;
@@ -25,7 +29,7 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: var(--main-bg-color);
+    background-color: var(--color-grey-dark);
 
     position: relative;
     margin-top: var(--header-height);
@@ -73,7 +77,7 @@ button > * {
 
 .btn:focus {
     outline: none;
-    border: 1px solid #fff;
+    border: 1px solid var(--color-white);
 }
 
 .btn--square {
@@ -85,11 +89,11 @@ button > * {
 }
 
 .btn--submit {
-    background-color: var(--orange-color);
+    background-color: var(--color-orange);
 }
 
 .btn--cancel {
-    background-color: var(--hover);
+    background-color: var(--color-grey-light);
 }
 
 /* header */
@@ -105,20 +109,20 @@ button > * {
     padding: 0 1rem;
     z-index: calc(var(--z-fixed) + 1);
     transition: height 0.5s;
-    background-color: #282828;
+    background-color: var(--color-grey);
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .header__toggle {
-    color: #FFF;
+    color: var(--color-white);
     font-size: 1.5rem;
     cursor: pointer;
 }
 
 /* side menu */
 .side-menu {
-    background-color: #282828;
-    color: var(--main-font-color);
+    background-color: var(--color-grey);
+    color: var(--color-white);
     width: var(--sidebar-width);
     position: fixed;
     overflow: hidden;
@@ -169,30 +173,30 @@ button > * {
 }
 
 .side-menu .project-row-btn:hover {
-    background-color: var(--hover);
+    background-color: var(--color-grey-light);
 }
 
 .project-row-btn--highlight {
-    background-color: var(--hover);
+    background-color: var(--color-grey-light);
 }
 
 .side-menu .project-color {
-    color: var(--secondary-font-color);
+    color: var(--color-grey-lighter);
     font-size: 1.5em;
     line-height: 1ch;
     margin-right: 0.3em;
 }
 
 .side-menu .todo-count {
-    color: var(--secondary-font-color);
+    color: var(--color-grey-lighter);
     margin-left: 0.2em;
     font-size: 0.8em;
 }
 
 /* project view */
 .project-view-container {
-    background-color: var(--main-bg-color);
-    color: var(--main-font-color);
+    background-color: var(--color-grey-dark);
+    color: var(--color-white);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -223,7 +227,7 @@ button > * {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    border-bottom: 1px solid var(--secondary-font-color);
+    border-bottom: 1px solid var(--color-grey-lighter);
 }
 
 .project-view .todo.todo--complete {
@@ -244,7 +248,7 @@ button > * {
 }
 
 .project-view .todo-due-date {
-    color: var(--secondary-font-color);
+    color: var(--color-grey-lighter);
 }
 
 .btn-row {
@@ -292,13 +296,13 @@ button > * {
 label:hover .custom-checkbox,
 [type="checkbox"]:focus + label .custom-checkbox {
     transform: scale(1.2);
-    background-color: var(--hover);
+    background-color: var(--color-grey-light);
 }
 
 [type="checkbox"]:checked + label .custom-checkbox {
-    background-color: var(--hover);
-    border-color: var(--hover);
-    box-shadow: inset 0 0 0 2px white;
+    background-color: var(--color-grey-light);
+    border-color: var(--color-grey-light);
+    box-shadow: inset 0 0 0 2px var(--color-white);
 }
 
 [type="checkbox"]:checked + label {
@@ -319,11 +323,10 @@ label:hover .custom-checkbox,
     border: 1px solid black;
     border-radius: 10px;
     z-index: var(--z-modal);
-    background-color: #fff;
     width: 400px;
     max-width: 80%;
-    background-color: var(--accent-color);
-    color: white;
+    background-color: var(--color-grey);
+    color: var(--color-white);
 }
 
 .modal--active {
@@ -332,8 +335,8 @@ label:hover .custom-checkbox,
 
 .modal__header {
     padding: 10px 15px;
-    border-bottom: 1px solid var(--hover);
-    background-color: var(--main-bg-color);
+    border-bottom: 1px solid var(--color-grey-light);
+    background-color: var(--color-grey-dark);
     border-radius: 10px 10px 0 0;
 }
 
@@ -365,22 +368,22 @@ label:hover .custom-checkbox,
     padding: 0.25em;
     font-size: 1rem;
     border-radius: 0.25em;
-    background-color: var(--main-bg-color);
-    color: white;
+    background-color: var(--color-grey-dark);
+    color: var(--color-white);
     font-family: inherit;
-    border: 1px solid var(--hover);
+    border: 1px solid var(--color-grey-light);
     transition: border-color 0.15s ease-in-out;
 }
 
 .modal__form-group input:hover,
 .modal__form-group select:hover {
-    border-color: white;
+    border-color: var(--color-white);
 }
 
 .modal__form-group input:focus,
 .modal__form-group select:focus {
     outline: none;
-    border-color: white;
+    border-color: var(--color-white);
 }
 
 .modal__btn-group {
