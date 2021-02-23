@@ -20,16 +20,12 @@ export function initGlobalEventListeners() {
             populateTodoForm(todo, modal);
         }
 
-        dom.showModalAndOverlay(modal);
+        handleOpenModal(modal);
     });
 
-    addGlobalEventListener('click', '#overlay', dom.hideAllModalsAndOverlay);
+    addGlobalEventListener('click', '#overlay', handleCloseModal);
 
-    addGlobalEventListener('click', '[data-btn="close-modal"]', (e) => {
-        // get the parent modal
-        const modal = e.target.closest('.modal');
-        dom.closeModalAndHideOverlay(modal);
-    });
+    addGlobalEventListener('click', '[data-btn="close-modal"]', handleCloseModal);
 
     addGlobalEventListener('submit', '[data-form="create-project"]', handleCreateProjectFormSubmit);
 
@@ -146,7 +142,7 @@ function handleCreateProjectFormSubmit(e) {
     form.reset();
 
     const modal = form.closest('.modal');
-    dom.closeModalAndHideOverlay(modal);
+    handleCloseModal(modal);
     dom.closeSideMenuMobile();
 }
 
@@ -207,7 +203,7 @@ function handleAddTodoForm(e) {
     addTodo(todo, projectId);
 
     form.reset();
-    dom.closeModalAndHideOverlay(modal);
+    handleCloseModal();
 }
 
 function handleEditTodoForm(e) {
@@ -232,7 +228,7 @@ function handleEditTodoForm(e) {
 
     form.reset();
     dom.renderProjectView(project);
-    dom.closeModalAndHideOverlay(modal);
+    handleCloseModal();
 }
 
 function addTodo(todo, projectId) {
@@ -319,4 +315,30 @@ function handleToggleCompleteTodos(e) {
     dom.toggleTodoContainerDisplay();
     dom.toggleEyeIcon(eyeIcon);
     dom.setEyeBtnTitle(eyeBtn, showCompleteTodos);
+}
+
+function handleOpenModal(modal) {
+    // make all focusable elements on page non tabbable
+    dom.removeTabbableFromElements(document);
+
+    // make all focusable elements on opened modal tabbable
+    dom.addTabbableToElements(modal);
+
+    // focus first input
+    modal.querySelector('input').focus();
+
+    dom.showModalAndOverlay(modal);
+}
+
+function handleCloseModal() {
+    // make all focusable elements on the page tabbable
+    dom.addTabbableToElements(document);
+
+    // make all focusable elements on all modals non tabbable
+    dom.removeTabbableFromModalElements();
+
+    // remove focus from currently focused element
+    document.activeElement.blur();
+
+    dom.hideAllModalsAndOverlay();
 }

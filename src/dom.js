@@ -143,6 +143,43 @@ export function openSideMenuMobile() {
     elems.sideMenu.classList.add('mobile-open');
 }
 
+export function setTabIndex(element, tabIndex) {
+    element.setAttribute('tabIndex', tabIndex);
+}
+
+export function getKeyboardFocusableElements (element = document) {
+  return [...element.querySelectorAll(
+    'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
+  )]
+    .filter(el => !el.hasAttribute('disabled'))
+}
+
+export function removeTabbableFromElements(element) {
+    const focusableElements = getKeyboardFocusableElements(element);
+
+    focusableElements.forEach(element => {
+        setTabIndex(element, -1);
+    });
+}
+
+export function addTabbableToElements(element) {
+    const focusableElements = getKeyboardFocusableElements(element);
+
+    focusableElements.forEach(element => {
+        setTabIndex(element, 0);
+    });
+}
+
+export function removeTabbableFromModalElements() {
+    // get all modals
+    const modals = [...document.querySelectorAll('.modal')];
+
+    // get all focusable elements in modals
+    const modalFocusableElements = modals.map(getKeyboardFocusableElements).flat();
+
+    modalFocusableElements.forEach(element => setTabIndex(element, -1));
+}
+
 const elems = {
     body: document.body,
     sideMenu: document.querySelector('[data-side-menu]'),
@@ -150,7 +187,7 @@ const elems = {
     projectsContainer: document.getElementById('projects-container'),
     projectNameInput: document.getElementById('input-project-name'),
     projectColorInput: document.getElementById('input-project-color'),
-    projectViewContainer: document.querySelector('[data-container="project-view"]'),
+    projectViewContainer: document.querySelector('[data-container="project-view"]')
 };
 
 function showModal(modal) {

@@ -41,11 +41,11 @@
             <form class="modal__form" data-form="create-project" autocomplete="off">
                 <div class="modal__form-group">
                     <label for="input-project-name">Project Name</label>
-                    <input type="text" id="input-project-name" required>
+                    <input type="text" id="input-project-name" required tabindex='-1'>
                 </div>
                 <div class="modal__form-group">
                     <label for="input-project-color">Choose a color:</label>
-                    <select id="input-project-color">
+                    <select id="input-project-color" tabindex='-1'>
                         <option data-css-color="red">Red</option>
                         <option data-css-color="green">Green</option>
                         <option data-css-color="blue">Blue</option>
@@ -56,8 +56,8 @@
                     </select>
                 </div>
                 <div class="modal__btn-group">
-                    <button class="btn btn--cancel" type="button" data-btn="close-modal">Cancel</button>
-                    <button class="btn btn--submit" type="submit">Add</button>
+                    <button class="btn btn--cancel" type="button" data-btn="close-modal" tabindex='-1'>Cancel</button>
+                    <button class="btn btn--submit" type="submit" tabindex='-1'>Add</button>
                 </div>
             </form>
         </div>
@@ -74,15 +74,15 @@
                 <form class="modal__form" data-form="" autocomplete="off">
                     <div class="modal__form-group">
                         <label data-label="todo-name" for="">Name</label>
-                        <input data-input="todo-name" type="text" id="" required>
+                        <input data-input="todo-name" type="text" id="" required tabindex='-1'>
                     </div>
                     <div class="modal__form-group">
                         <label data-label="todo-due-date" for="">Due Date</label>
-                        <input data-input="todo-due-date" type="date" id="">
+                        <input data-input="todo-due-date" type="date" id="" tabindex='-1'>
                     </div>
                     <div class="modal__btn-group">
-                        <button class="btn btn--cancel" type="button" data-btn="close-modal">Cancel</button>
-                        <button class="btn btn--submit" type="submit"></button>
+                        <button class="btn btn--cancel" type="button" data-btn="close-modal" tabindex='-1'>Cancel</button>
+                        <button class="btn btn--submit" type="submit" tabindex='-1'></button>
                     </div>
                 </form>
             </div>
