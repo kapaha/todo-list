@@ -4,6 +4,18 @@ import { getTodoCount } from './todoList';
 
 const HIGHLIGHT_PROJECT_CSS_CLASS = 'project-row-btn--highlight';
 
+const elems = {
+    body: document.body,
+    sideMenu: document.querySelector('[data-side-menu]'),
+    overlay: document.getElementById('overlay'),
+    projectsContainer: document.getElementById('projects-container'),
+    projectNameInput: document.getElementById('input-project-name'),
+    projectColorInput: document.getElementById('input-project-color'),
+    projectViewContainer: document.querySelector(
+        '[data-container="project-view"]'
+    ),
+};
+
 export function toggleSideMenu() {
     if (elems.sideMenu == null) return;
 
@@ -166,16 +178,16 @@ export function getKeyboardFocusableElements(element = document) {
 export function removeTabbableFromElements(element) {
     const focusableElements = getKeyboardFocusableElements(element);
 
-    focusableElements.forEach((element) => {
-        setTabIndex(element, -1);
+    focusableElements.forEach((el) => {
+        setTabIndex(el, -1);
     });
 }
 
 export function addTabbableToElements(element) {
     const focusableElements = getKeyboardFocusableElements(element);
 
-    focusableElements.forEach((element) => {
-        setTabIndex(element, 0);
+    focusableElements.forEach((el) => {
+        setTabIndex(el, 0);
     });
 }
 
@@ -191,18 +203,6 @@ export function removeTabbableFromModalElements() {
     modalFocusableElements.forEach((element) => setTabIndex(element, -1));
 }
 
-const elems = {
-    body: document.body,
-    sideMenu: document.querySelector('[data-side-menu]'),
-    overlay: document.getElementById('overlay'),
-    projectsContainer: document.getElementById('projects-container'),
-    projectNameInput: document.getElementById('input-project-name'),
-    projectColorInput: document.getElementById('input-project-color'),
-    projectViewContainer: document.querySelector(
-        '[data-container="project-view"]'
-    ),
-};
-
 function showModal(modal) {
     // check modal exists
     if (modal == null) return;
@@ -214,7 +214,6 @@ function showModal(modal) {
 function showOverlay() {
     // check overlay exists
     if (elems.overlay == null) return;
-
     // show overlay
     elems.overlay.classList.add('active');
 }

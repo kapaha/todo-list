@@ -10,7 +10,7 @@ const templates = {
 };
 
 function getFragmentFromTemplate(template) {
-    if (template == null) return;
+    if (template == null) return null;
     return document.importNode(template.content, true);
 }
 
@@ -113,7 +113,7 @@ export function createTodoComponent(todo) {
     todoEl.dataset.todoId = todo.id;
     if (todo.isComplete) todoEl.classList.add('todo--complete');
     todoCheckbox.id = `todo-checkbox-${todo.id}`;
-    todoCheckbox.checked = todo.isComplete ? true : false;
+    todoCheckbox.checked = todo.isComplete;
     todoLabel.setAttribute('for', `todo-checkbox-${todo.id}`);
     todoName.textContent = todo.name;
     todoDueDate.textContent = formatDate(todo.dueDate);
