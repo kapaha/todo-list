@@ -1,6 +1,6 @@
 import * as comp from './components';
 import { getProjects } from './localStorage';
-import { getTodoCount } from './todoList'
+import { getTodoCount } from './todoList';
 
 const HIGHLIGHT_PROJECT_CSS_CLASS = 'project-row-btn--highlight';
 
@@ -28,7 +28,7 @@ export function hideAllModalsAndOverlay() {
     const modals = document.querySelectorAll('.modal--active');
 
     // loop through open modals and close them
-    modals.forEach(modal => {
+    modals.forEach((modal) => {
         hideModal(modal);
     });
 
@@ -43,21 +43,21 @@ export function closeModalAndHideOverlay(modal) {
 export function getCreateProjectFormData() {
     // get the form elements values
     const projectName = elems.projectNameInput.value;
-    const projectColor = elems.projectColorInput
-        .options[elems.projectColorInput.selectedIndex]
-        .dataset.cssColor;
+    const projectColor =
+        elems.projectColorInput.options[elems.projectColorInput.selectedIndex]
+            .dataset.cssColor;
 
     return {
         name: projectName,
-        color: projectColor
-    }
+        color: projectColor,
+    };
 }
 
 export function renderProjects() {
     const fragment = document.createDocumentFragment();
     const projects = getProjects();
 
-    projects.forEach(project => {
+    projects.forEach((project) => {
         const projectComponent = comp.createProjectComponent(project);
         fragment.appendChild(projectComponent);
     });
@@ -86,7 +86,9 @@ export function highlightProjectBtn(btn) {
 }
 
 export function updateTodoCount(project) {
-    const todoCountEl = document.querySelector(`[data-project-id="${project.id}"] [data-todo-count]`);
+    const todoCountEl = document.querySelector(
+        `[data-project-id="${project.id}"] [data-todo-count]`
+    );
     const todoCount = getTodoCount(project);
 
     todoCountEl.textContent = todoCount;
@@ -94,30 +96,34 @@ export function updateTodoCount(project) {
 
 export function getTodoFormData(form) {
     const todoName = form.querySelector('[data-input="todo-name"]').value;
-    const todoDueDate = form.querySelector('[data-input="todo-due-date"]').value;
+    const todoDueDate = form.querySelector(
+        '[data-input="todo-due-date"]'
+    ).value;
 
     return {
         name: todoName,
-        dueDate: todoDueDate
-    }
+        dueDate: todoDueDate,
+    };
 }
 
 export function renderModals() {
     const modals = comp.createModals();
-    modals.forEach(modal => {
+    modals.forEach((modal) => {
         elems.body.append(modal);
     });
 }
 
 export function toggleTodoContainerDisplay() {
-    const todoContainer = elems.projectViewContainer.querySelector('[data-container="todo-container"]');
+    const todoContainer = elems.projectViewContainer.querySelector(
+        '[data-container="todo-container"]'
+    );
     const completeTodoDisplay = getComputedStyle(todoContainer)
         .getPropertyValue('--complete-todo-display')
         .trim();
 
     todoContainer.style.setProperty(
-        "--complete-todo-display",
-        completeTodoDisplay === "none" ? "flex" : "none"
+        '--complete-todo-display',
+        completeTodoDisplay === 'none' ? 'flex' : 'none'
     );
 }
 
@@ -130,7 +136,9 @@ export function setEyeBtnTitle(eyeBtn, showCompleteTodos) {
     const showCompleteTodosText = 'Show Complete Todos';
     const hideCompleteTodosText = 'Hide Complete Todos';
 
-    const titleText = showCompleteTodos ? hideCompleteTodosText : showCompleteTodosText;
+    const titleText = showCompleteTodos
+        ? hideCompleteTodosText
+        : showCompleteTodosText;
 
     eyeBtn.setAttribute('title', titleText);
 }
@@ -147,17 +155,18 @@ export function setTabIndex(element, tabIndex) {
     element.setAttribute('tabIndex', tabIndex);
 }
 
-export function getKeyboardFocusableElements (element = document) {
-  return [...element.querySelectorAll(
-    'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
-  )]
-    .filter(el => !el.hasAttribute('disabled'))
+export function getKeyboardFocusableElements(element = document) {
+    return [
+        ...element.querySelectorAll(
+            'a, button, input, textarea, select, details,[tabindex]:not([tabindex="-1"])'
+        ),
+    ].filter((el) => !el.hasAttribute('disabled'));
 }
 
 export function removeTabbableFromElements(element) {
     const focusableElements = getKeyboardFocusableElements(element);
 
-    focusableElements.forEach(element => {
+    focusableElements.forEach((element) => {
         setTabIndex(element, -1);
     });
 }
@@ -165,7 +174,7 @@ export function removeTabbableFromElements(element) {
 export function addTabbableToElements(element) {
     const focusableElements = getKeyboardFocusableElements(element);
 
-    focusableElements.forEach(element => {
+    focusableElements.forEach((element) => {
         setTabIndex(element, 0);
     });
 }
@@ -175,9 +184,11 @@ export function removeTabbableFromModalElements() {
     const modals = [...document.querySelectorAll('.modal')];
 
     // get all focusable elements in modals
-    const modalFocusableElements = modals.map(getKeyboardFocusableElements).flat();
+    const modalFocusableElements = modals
+        .map(getKeyboardFocusableElements)
+        .flat();
 
-    modalFocusableElements.forEach(element => setTabIndex(element, -1));
+    modalFocusableElements.forEach((element) => setTabIndex(element, -1));
 }
 
 const elems = {
@@ -187,7 +198,9 @@ const elems = {
     projectsContainer: document.getElementById('projects-container'),
     projectNameInput: document.getElementById('input-project-name'),
     projectColorInput: document.getElementById('input-project-color'),
-    projectViewContainer: document.querySelector('[data-container="project-view"]')
+    projectViewContainer: document.querySelector(
+        '[data-container="project-view"]'
+    ),
 };
 
 function showModal(modal) {
@@ -233,7 +246,9 @@ function removeAllChildElements(element) {
 }
 
 function removeHighlightedProjectBtn() {
-    const highlightedBtn = document.querySelector(`.${HIGHLIGHT_PROJECT_CSS_CLASS}`);
+    const highlightedBtn = document.querySelector(
+        `.${HIGHLIGHT_PROJECT_CSS_CLASS}`
+    );
 
     if (highlightedBtn == null) return;
 

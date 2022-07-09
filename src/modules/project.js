@@ -15,7 +15,7 @@ export function createDefaultProject() {
     const defaultProject = new Project('Default', 'grey');
     const defaultTodos = createDefaultTodos();
 
-    defaultTodos.forEach(todo => {
+    defaultTodos.forEach((todo) => {
         defaultProject.todoList.push(todo);
     });
 

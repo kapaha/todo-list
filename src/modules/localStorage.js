@@ -1,7 +1,7 @@
 import { createDefaultProject } from './project';
 import { editObject } from './todoList';
 
-const LOCAL_STORAGE_PROJECTS_KEY = 'todoList.projects'
+const LOCAL_STORAGE_PROJECTS_KEY = 'todoList.projects';
 const LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY = 'todoList.selectedProjectId';
 
 export function getProjects() {
@@ -22,20 +22,20 @@ export function getProjects() {
 
 export function addProject(project) {
     const projects = getProjects();
-    projects.push(project)
+    projects.push(project);
     saveProjects(projects);
 }
 
 export function removeProject(projectId) {
     let projects = getProjects();
-    projects = projects.filter(project => project.id !== projectId);
+    projects = projects.filter((project) => project.id !== projectId);
     saveProjects(projects);
 }
 
 export function addTodo(todo, projectId) {
     const projects = getProjects();
 
-    projects.forEach(project => {
+    projects.forEach((project) => {
         if (project.id === projectId) {
             project.todoList.push(todo);
         }
@@ -48,10 +48,11 @@ export function addTodo(todo, projectId) {
 export function deleteTodo(todoId, projectId) {
     const projects = getProjects();
 
-    projects.forEach(project => {
+    projects.forEach((project) => {
         if (project.id === projectId) {
-            project.todoList =
-                project.todoList.filter(todo => todo.id !== todoId);
+            project.todoList = project.todoList.filter(
+                (todo) => todo.id !== todoId
+            );
         }
     });
 
@@ -61,9 +62,9 @@ export function deleteTodo(todoId, projectId) {
 export function editTodo(todoId, projectId, properties) {
     let projects = getProjects();
 
-    projects.forEach(project => {
+    projects.forEach((project) => {
         if (project.id === projectId) {
-            project.todoList.forEach(todo => {
+            project.todoList.forEach((todo) => {
                 if (todo.id === todoId) {
                     editObject(todo, properties);
                 }
@@ -78,9 +79,9 @@ export function editTodo(todoId, projectId, properties) {
 export function editProject(projectId, properties) {
     let projects = getProjects();
 
-    projects.forEach(project => {
+    projects.forEach((project) => {
         if (project.id === projectId) {
-            editObject(project, properties)
+            editObject(project, properties);
         }
     });
 
@@ -90,9 +91,11 @@ export function editProject(projectId, properties) {
 export function sortTodos(projectId) {
     let projects = getProjects();
 
-    projects.forEach(project => {
+    projects.forEach((project) => {
         if (project.id === projectId) {
-            project.todoList = project.todoList.sort((a, b) => a.isComplete - b.isComplete);
+            project.todoList = project.todoList.sort(
+                (a, b) => a.isComplete - b.isComplete
+            );
         }
     });
 
@@ -100,7 +103,7 @@ export function sortTodos(projectId) {
 }
 
 function isLocalStorageKeyPopulated(key) {
-    return !!localStorage.getItem(key)
+    return !!localStorage.getItem(key);
 }
 
 function saveProjects(projects) {

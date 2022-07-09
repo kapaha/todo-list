@@ -8,7 +8,8 @@
         "build": "webpack --mode=production",
         "deploy": "npm run build && gh-pages -d dist",
         "lint": "eslint .",
-        "lint:fix": "eslint . --fix"
+        "lint:fix": "eslint . --fix",
+        "format": "prettier . --write"
     },
     "repository": {
         "type": "git",

@@ -1,4 +1,10 @@
-import { endOfYear, add, startOfToday, startOfTomorrow, startOfYesterday } from 'date-fns';
+import {
+    endOfYear,
+    add,
+    startOfToday,
+    startOfTomorrow,
+    startOfYesterday,
+} from 'date-fns';
 import { generateId, formatDateForDatePicker } from './todoList';
 
 export default class Todo {
@@ -15,13 +21,15 @@ export function createDefaultTodos() {
     const todayDate = formatDateForDatePicker(startOfToday());
     const tomorrowDate = formatDateForDatePicker(startOfTomorrow());
     const endOfYearDate = formatDateForDatePicker(endOfYear(startOfToday()));
-    const startOfNextYearDate = formatDateForDatePicker(add(endOfYear(startOfToday()), { days: 1 }));
+    const startOfNextYearDate = formatDateForDatePicker(
+        add(endOfYear(startOfToday()), { days: 1 })
+    );
 
     return [
         new Todo('Pay Bills', yesterdayDate),
         new Todo('Grocery Shopping', todayDate),
         new Todo('Visit Best Friend', tomorrowDate),
         new Todo('Prep for New Years party', endOfYearDate),
-        new Todo('Write down New Years resolutions', startOfNextYearDate)
+        new Todo('Write down New Years resolutions', startOfNextYearDate),
     ];
 }

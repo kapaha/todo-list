@@ -3,7 +3,14 @@ import * as dom from './dom';
 import Project from './project';
 import * as ls from './localStorage';
 import Todo from './todo';
-import { format, isThisYear, isToday, isTomorrow, isYesterday, isPast } from 'date-fns';
+import {
+    format,
+    isThisYear,
+    isToday,
+    isTomorrow,
+    isYesterday,
+    isPast,
+} from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 
 export function initGlobalEventListeners() {
@@ -13,7 +20,7 @@ export function initGlobalEventListeners() {
         const el = e.target;
         const modal = document.querySelector(el.dataset.modalTarget);
 
-        if (el.dataset.btn === "edit-todo") {
+        if (el.dataset.btn === 'edit-todo') {
             const projectId = getClosestProjectId(el);
             const todoId = getClosestTodoId(el);
             const todo = getTodoById(projectId, todoId);
@@ -25,13 +32,29 @@ export function initGlobalEventListeners() {
 
     addGlobalEventListener('click', '#overlay', handleCloseModal);
 
-    addGlobalEventListener('click', '[data-btn="close-modal"]', handleCloseModal);
+    addGlobalEventListener(
+        'click',
+        '[data-btn="close-modal"]',
+        handleCloseModal
+    );
 
-    addGlobalEventListener('submit', '[data-form="create-project"]', handleCreateProjectFormSubmit);
+    addGlobalEventListener(
+        'submit',
+        '[data-form="create-project"]',
+        handleCreateProjectFormSubmit
+    );
 
-    addGlobalEventListener('submit', '[data-form="add-todo"]', handleAddTodoForm);
+    addGlobalEventListener(
+        'submit',
+        '[data-form="add-todo"]',
+        handleAddTodoForm
+    );
 
-    addGlobalEventListener('submit', '[data-form="edit-todo"]', handleEditTodoForm);
+    addGlobalEventListener(
+        'submit',
+        '[data-form="edit-todo"]',
+        handleEditTodoForm
+    );
 
     addGlobalEventListener('click', '[data-btn="show-project-view"]', (e) => {
         const projectBtn = e.target;
@@ -58,19 +81,26 @@ export function initGlobalEventListeners() {
             dom.openSideMenuMobile();
             dom.removeProjectView();
         }
-
     });
 
     addGlobalEventListener('click', '[data-btn="delete-todo"]', (e) => {
         const projectId = getClosestProjectId(e.target);
         const todoId = getClosestTodoId(e.target);
 
-        deleteTodo(todoId, projectId)
+        deleteTodo(todoId, projectId);
     });
 
-    addGlobalEventListener('change', '[data-checkbox="todo"]', handleTodoCheckboxChange);
+    addGlobalEventListener(
+        'change',
+        '[data-checkbox="todo"]',
+        handleTodoCheckboxChange
+    );
 
-    addGlobalEventListener('click', '[data-btn="toggle-complete-todos"]', handleToggleCompleteTodos);
+    addGlobalEventListener(
+        'click',
+        '[data-btn="toggle-complete-todos"]',
+        handleToggleCompleteTodos
+    );
 }
 
 export function getSelectedProject() {
@@ -89,7 +119,7 @@ export function editObject(object, properties) {
 }
 
 export function getTodoCount(project) {
-    return project.todoList.filter(todo => !todo.isComplete).length || '';
+    return project.todoList.filter((todo) => !todo.isComplete).length || '';
 }
 
 export function formatDate(date) {
@@ -130,10 +160,7 @@ function handleCreateProjectFormSubmit(e) {
     if (!isValidCreateProjectFormData(formData)) return;
 
     const formatedFormData = formatCreateProjectFormData(formData);
-    const project = new Project(
-        formatedFormData.name,
-        formatedFormData.color
-    );
+    const project = new Project(formatedFormData.name, formatedFormData.color);
 
     ls.addProject(project);
     dom.renderProjects();
@@ -166,12 +193,12 @@ function getClosestProjectId(element) {
 }
 
 function getProjectById(projectId) {
-    return ls.getProjects().filter(project => project.id === projectId)[0];
+    return ls.getProjects().filter((project) => project.id === projectId)[0];
 }
 
 function getTodoById(projectId, todoId) {
     const project = getProjectById(projectId);
-    return project.todoList.filter(todo => todo.id === todoId)[0];
+    return project.todoList.filter((todo) => todo.id === todoId)[0];
 }
 
 function handleProjectViewChange(project) {
@@ -181,7 +208,7 @@ function handleProjectViewChange(project) {
 }
 
 function getProjectBtn(project) {
-    return document.querySelector(`li[data-project-id="${project.id}"]`)
+    return document.querySelector(`li[data-project-id="${project.id}"]`);
 }
 
 function handleAddTodoForm(e) {
@@ -194,10 +221,7 @@ function handleAddTodoForm(e) {
 
     const formatedFormData = formatTodoFormData(formData);
     const projectId = ls.getSelectedProjectId();
-    const todo = new Todo(
-        formatedFormData.name,
-        formatedFormData.dueDate
-    );
+    const todo = new Todo(formatedFormData.name, formatedFormData.dueDate);
     const modal = form.closest('.modal');
 
     addTodo(todo, projectId);
@@ -221,7 +245,7 @@ function handleEditTodoForm(e) {
 
     ls.editTodo(todoId, projectId, {
         name: formatedFormData.name,
-        dueDate: formatedFormData.dueDate
+        dueDate: formatedFormData.dueDate,
     });
 
     const project = getProjectById(projectId);
@@ -281,9 +305,11 @@ function handleTodoCheckboxChange(e) {
     const projectId = getClosestProjectId(checkbox);
     const todoId = getClosestTodoId(checkbox);
 
-    todoEl.classList.toggle('todo--complete')
+    todoEl.classList.toggle('todo--complete');
 
-    ls.editTodo(todoId, projectId, { isComplete: checkbox.checked ? true : false });
+    ls.editTodo(todoId, projectId, {
+        isComplete: checkbox.checked ? true : false,
+    });
 
     const project = getProjectById(projectId);
 
@@ -302,15 +328,14 @@ function populateTodoForm(todo, modal) {
 }
 
 function handleToggleCompleteTodos(e) {
-    const eyeBtn = e.target
+    const eyeBtn = e.target;
     const eyeIcon = eyeBtn.querySelector('.fas');
     const projectId = getClosestProjectId(eyeBtn);
-    const showCompleteTodos = eyeIcon.classList.contains('fa-eye') ? true : false;
+    const showCompleteTodos = eyeIcon.classList.contains('fa-eye')
+        ? true
+        : false;
 
-    ls.editProject(
-        projectId,
-        { showCompleteTodos: showCompleteTodos }
-    );
+    ls.editProject(projectId, { showCompleteTodos: showCompleteTodos });
 
     dom.toggleTodoContainerDisplay();
     dom.toggleEyeIcon(eyeIcon);
