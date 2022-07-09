@@ -12,7 +12,7 @@
     --color-red: #c0392b;
 
     --sidebar-width: 100vw;
-    --header-height: 4rem;
+    --header-height: 3rem;
     --z-fixed: 100;
     --z-overlay: 200;
     --z-modal: 300;
@@ -68,7 +68,6 @@ button > * {
     border-radius: 0.2em;
     padding: 0.6em 1.5em;
     transition: opacity 150ms ease-in-out;
-    color: white;
 }
 
 .btn:active {
@@ -119,7 +118,7 @@ button > * {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 0 1rem;
     z-index: calc(var(--z-fixed) + 1);
     transition: height 0.5s;
     background-color: var(--color-grey);
@@ -448,15 +447,17 @@ label:hover .custom-checkbox,
         left: 0;
     }
 
+    .header {
+        height: calc(var(--header-height) + 1rem);
+    }
+
+    .side-menu {
+        top: calc(var(--header-height) + 1rem);
+    }
+
     .project-view-container {
         padding: 3em;
     }
-}
-
-/* || Utils */
-
-.hidden {
-    display: none;
 }
 
 
