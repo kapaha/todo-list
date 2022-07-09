@@ -1,5 +1,9 @@
-import { initGlobalEventListeners, getSelectedProject } from './todoList';
-import { renderModals, renderProjects, renderProjectView } from './dom';
+import {
+    initGlobalEventListeners,
+    getSelectedProject,
+} from './modules/todoList';
+import { renderModals, renderProjects, renderProjectView } from './modules/dom';
+import './styles/styles.css';
 
 init();
 

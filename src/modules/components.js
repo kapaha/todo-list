@@ -1,20 +1,27 @@
 import { getSelectedProjectId } from './localStorage';
-import { highlightProjectBtn, setEyeBtnTitle, toggleEyeIcon} from './dom';
+import { highlightProjectBtn, setEyeBtnTitle, toggleEyeIcon } from './dom';
 import { getTodoCount, formatDate, getDateColor } from './todoList';
 
 const templates = {
     project: document.querySelector('[data-template="project"'),
     projectView: document.querySelector('[data-template="project-view"]'),
     todo: document.querySelector('[data-template="todo"]'),
-    todoModal: document.querySelector('[data-template="modal-todo"]')
-}
+    todoModal: document.querySelector('[data-template="modal-todo"]'),
+};
 
 function getFragmentFromTemplate(template) {
-    if (template == null) return
+    if (template == null) return;
     return document.importNode(template.content, true);
 }
 
-function createTodoModal(modalId, modalTitleText, formDatasetForm, todoNameInputId, todoDueDateInputId, submitBtnText) {
+function createTodoModal(
+    modalId,
+    modalTitleText,
+    formDatasetForm,
+    todoNameInputId,
+    todoDueDateInputId,
+    submitBtnText
+) {
     const fragment = getFragmentFromTemplate(templates.todoModal);
 
     const modal = fragment.querySelector('.modal');
@@ -47,7 +54,7 @@ export function createProjectComponent(project) {
     const projectTitle = fragment.querySelector('.project-name');
     const projectColor = fragment.querySelector('.project-color');
     const todoCount = fragment.querySelector('.todo-count');
-    const projectEl = fragment.querySelector('.project')
+    const projectEl = fragment.querySelector('.project');
 
     projectEl.dataset.projectId = project.id;
     projectTitle.textContent = project.name;
@@ -55,7 +62,9 @@ export function createProjectComponent(project) {
     projectColor.style.color = project.color;
 
     if (project.id === getSelectedProjectId()) {
-        const projectRowBtn = fragment.querySelector('[data-btn="show-project-view"]')
+        const projectRowBtn = fragment.querySelector(
+            '[data-btn="show-project-view"]'
+        );
         highlightProjectBtn(projectRowBtn);
     }
 
@@ -67,23 +76,25 @@ export function createProjectViewComponent(project) {
 
     const container = fragment.querySelector('.project-view');
     const projectName = fragment.querySelector('.project-name');
-    const todoContainer = fragment.querySelector('[data-container="todo-container"]');
+    const todoContainer = fragment.querySelector(
+        '[data-container="todo-container"]'
+    );
     const eyeBtn = fragment.querySelector('[data-btn="toggle-complete-todos"]');
-    const eyeIcon = fragment.querySelector('.fa-eye')
+    const eyeIcon = fragment.querySelector('.fa-eye');
 
     container.dataset.projectId = project.id;
     projectName.textContent = project.name;
 
-    project.todoList.forEach(todo => {
+    project.todoList.forEach((todo) => {
         const todoComponent = createTodoComponent(todo);
         todoContainer.appendChild(todoComponent);
     });
 
     if (project.showCompleteTodos) {
         toggleEyeIcon(eyeIcon);
-        todoContainer.style.setProperty("--complete-todo-display", 'flex');
+        todoContainer.style.setProperty('--complete-todo-display', 'flex');
     } else {
-        todoContainer.style.setProperty("--complete-todo-display", 'none');
+        todoContainer.style.setProperty('--complete-todo-display', 'none');
     }
 
     setEyeBtnTitle(eyeBtn, project.showCompleteTodos);
@@ -93,20 +104,20 @@ export function createProjectViewComponent(project) {
 
 export function createTodoComponent(todo) {
     const fragment = getFragmentFromTemplate(templates.todo);
-        const todoEl = fragment.querySelector('.todo');
-        const todoCheckbox = fragment.querySelector('[data-checkbox="todo"]');
-        const todoLabel = fragment.querySelector('[data-label="todo-checkbox"]');
-        const todoName = fragment.querySelector('.todo-name');
-        const todoDueDate = fragment.querySelector('.todo-due-date');
+    const todoEl = fragment.querySelector('.todo');
+    const todoCheckbox = fragment.querySelector('[data-checkbox="todo"]');
+    const todoLabel = fragment.querySelector('[data-label="todo-checkbox"]');
+    const todoName = fragment.querySelector('.todo-name');
+    const todoDueDate = fragment.querySelector('.todo-due-date');
 
-        todoEl.dataset.todoId = todo.id;
-        if (todo.isComplete) todoEl.classList.add('todo--complete');
-        todoCheckbox.id = `todo-checkbox-${todo.id}`;
-        todoCheckbox.checked = todo.isComplete ? true: false;
-        todoLabel.setAttribute('for', `todo-checkbox-${todo.id}`);
-        todoName.textContent = todo.name;
-        todoDueDate.textContent = formatDate(todo.dueDate);
-        todoDueDate.style.color = getDateColor(todo.dueDate);
+    todoEl.dataset.todoId = todo.id;
+    if (todo.isComplete) todoEl.classList.add('todo--complete');
+    todoCheckbox.id = `todo-checkbox-${todo.id}`;
+    todoCheckbox.checked = todo.isComplete ? true : false;
+    todoLabel.setAttribute('for', `todo-checkbox-${todo.id}`);
+    todoName.textContent = todo.name;
+    todoDueDate.textContent = formatDate(todo.dueDate);
+    todoDueDate.style.color = getDateColor(todo.dueDate);
 
     return fragment;
 }
