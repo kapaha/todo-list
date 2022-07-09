@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
-
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap);
 :root {
     --color-grey-dark: #1f1f1f;
     --color-grey: #282828;
@@ -460,3 +459,6 @@ label:hover .custom-checkbox,
         padding: 3em;
     }
 }
+
+
+/*# sourceMappingURL=main.bundle.css.map*/
